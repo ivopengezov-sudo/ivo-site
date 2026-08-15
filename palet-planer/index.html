@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Палет Планер</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1c2128">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+  :root{
+    --graphite:#1c2128;
+    --graphite2:#252b34;
+    --steel:#5b84b1;
+    --steel-dim:#3a4a5e;
+    --paper:#f2efe6;
+    --paper-line:#d9d3c1;
+    --amber:#d68910;
+    --text:#e8e6e1;
+    --text-dim:#9aa3ad;
+    --ok:#7fae6f;
+    --warn:#c95b4a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh;
+    background:var(--graphite);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+  }
+  ::selection{background:var(--steel); color:white;}
+
+  #sidebar{
+    width:340px; min-width:340px;
+    background:var(--graphite2);
+    border-right:1px solid #333a44;
+    padding:28px 24px;
+    display:flex; flex-direction:column; gap:22px;
+    height:100vh; overflow-y:auto;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:.14em; color:var(--steel);
+    text-transform:uppercase; margin-bottom:-6px;
+  }
+  h1{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:22px; font-weight:700; margin:0;
+    line-height:1.25;
+  }
+  .sub{color:var(--text-dim); font-size:13px; line-height:1.5; margin-top:-8px;}
+
+  .field label{
+    display:block; font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--text-dim); margin-bottom:6px; font-family:'IBM Plex Mono',monospace;
+  }
+  .field input[type=number], .field input[type=file]{
+    width:100%; background:var(--graphite); border:1px solid var(--steel-dim);
+    color:var(--text); padding:9px 10px; border-radius:3px; font-size:14px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .field input[type=number]:focus{outline:2px solid var(--steel); outline-offset:1px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+
+  #dropzone{
+    border:1.5px dashed var(--steel-dim); border-radius:4px; padding:18px 14px;
+    text-align:center; cursor:pointer; transition:.15s; font-size:13px; color:var(--text-dim);
+  }
+  #dropzone:hover, #dropzone.drag{border-color:var(--steel); color:var(--text); background:#20262e;}
+  #dropzone strong{color:var(--steel);}
+  #fileinfo{font-size:12px; color:var(--ok); margin-top:6px; min-height:16px; font-family:'IBM Plex Mono',monospace;}
+
+  button#compute{
+    background:var(--steel); color:#0e1216; border:none; padding:13px;
+    font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:14px;
+    letter-spacing:.04em; border-radius:3px; cursor:pointer; text-transform:uppercase;
+    transition:.15s;
+  }
+  button#compute:hover{background:#6f9bcb;}
+  button#compute:disabled{background:#3a4048; color:#71787f; cursor:not-allowed;}
+
+  .hint{font-size:11.5px; color:var(--text-dim); line-height:1.5; border-top:1px solid #333a44; padding-top:14px;}
+  code{background:#141820; padding:1px 5px; border-radius:2px; font-size:11px;}
+
+  #main{flex:1; display:flex; flex-direction:column; height:100vh; overflow:hidden;}
+  #topbar{
+    padding:18px 32px; border-bottom:1px solid #333a44;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  #summary{display:flex; gap:28px; flex-wrap:wrap;}
+  .stat .num{font-family:'IBM Plex Mono',monospace; font-size:24px; font-weight:700; color:var(--steel);}
+  .stat .lbl{font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.06em;}
+
+  #body{flex:1; display:flex; overflow:hidden;}
+  #palletlist{
+    width:220px; min-width:220px; border-right:1px solid #333a44; overflow-y:auto; padding:14px 0;
+  }
+  .pallet-btn{
+    width:100%; text-align:left; background:none; border:none; color:var(--text-dim);
+    padding:11px 20px; font-family:'IBM Plex Mono',monospace; font-size:13px; cursor:pointer;
+    border-left:3px solid transparent;
+  }
+  .pallet-btn:hover{background:#20262e; color:var(--text);}
+  .pallet-btn.active{color:var(--text); border-left-color:var(--amber); background:#20262e;}
+  .pallet-btn .w{color:var(--text-dim); font-size:11px; display:block; margin-top:2px;}
+
+  #viewer{flex:1; overflow-y:auto; padding:26px 32px; display:flex; flex-direction:column; gap:18px;}
+  #layerTabs{display:flex; gap:6px; flex-wrap:wrap;}
+  .layer-tab{
+    background:var(--graphite2); border:1px solid var(--steel-dim); color:var(--text-dim);
+    padding:6px 13px; border-radius:14px; font-size:12px; cursor:pointer; font-family:'IBM Plex Mono',monospace;
+  }
+  .layer-tab.active{background:var(--steel); color:#0e1216; border-color:var(--steel); font-weight:600;}
+
+  #drawing{
+    background:var(--paper); border-radius:4px; padding:20px;
+    box-shadow:0 8px 30px rgba(0,0,0,.35);
+  }
+  #drawing svg{display:block; width:100%; height:auto;}
+  .rect-piece{fill:#c7d4e3; stroke:#2c3a4d; stroke-width:2;}
+  .rect-piece:hover{fill:var(--amber);}
+  .rect-label{font-family:'IBM Plex Mono',monospace; font-size:15px; fill:#1c2128; font-weight:700;}
+  .dim-text{font-family:'IBM Plex Mono',monospace; font-size:11px; fill:#7a6f5a;}
+
+  #empty{flex:1; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; color:var(--text-dim);}
+  #empty .big{font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--text); text-align:center; max-width:380px; line-height:1.6;}
+
+  ::-webkit-scrollbar{width:9px; height:9px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  ::-webkit-scrollbar-thumb{background:#3a4048; border-radius:5px;}
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div class="brand">Прототип · v0.1</div>
+  <h1>Палет<br>Планер</h1>
+  <div class="sub">Качи поръчка (CSV), задай изисквания за палета, изчисли и визуализирай подреждането.</div>
+
+  <div class="field">
+    <label>Поръчка (CSV)</label>
+    <div id="dropzone">
+      Плъзни файл тук или <strong>избери</strong><br>
+      <input type="file" id="fileInput" accept=".csv" style="display:none">
+      <div id="fileinfo"></div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Размер на палет (мм)</label>
+    <div class="grid2">
+      <input type="number" id="palletL" value="1200" placeholder="дължина">
+      <input type="number" id="palletW" value="800" placeholder="ширина">
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field">
+      <label>Макс. тегло (кг)</label>
+      <input type="number" id="maxWeight" value="2500">
+    </div>
+    <div class="field">
+      <label>Макс. височина (см)</label>
+      <input type="number" id="maxHeight" value="150">
+    </div>
+  </div>
+
+  <button id="compute" disabled>Изчисли подреждане</button>
+
+  <div class="hint">
+    Очаквани колони в CSV: <code>pos,name,L_mm,W_mm,T_mm,qty,unit_kg</code><br><br>
+    Това е ранен прототип — алгоритъмът пакетира правоъгълни детайли по слоеве (shelf-packing) и ги трупа по тегло/височина до зададените лимити.
+  </div>
+</div>
+
+<div id="main">
+  <div id="topbar">
+    <div id="summary" style="display:none;"></div>
