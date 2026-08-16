@@ -224,16 +224,22 @@ function handleFile(file){
 
 computeBtn.addEventListener('click', () => {
   if (!parsedRows) return;
-  const cfg = {
-    L: +document.getElementById('palletL').value,
-    W: +document.getElementById('palletW').value,
-    maxWeight: +document.getElementById('maxWeight').value,
-    maxHeightMM: +document.getElementById('maxHeight').value * 10,
-  };
-  const pieces = explode(parsedRows);
-  const layers = packLayers(pieces, cfg.L, cfg.W);
-  const pallets = groupIntoPallets(layers, cfg.maxWeight, cfg.maxHeightMM);
-  render(pallets, cfg);
+  computeBtn.disabled = true;
+  computeBtn.textContent = 'Изчислява...';
+  setTimeout(() => {
+    const cfg = {
+      L: +document.getElementById('palletL').value,
+      W: +document.getElementById('palletW').value,
+      maxWeight: +document.getElementById('maxWeight').value,
+      maxHeightMM: +document.getElementById('maxHeight').value * 10,
+    };
+    const pieces = explode(parsedRows);
+    const layers = packLayers(pieces, cfg.L, cfg.W);
+    const pallets = groupIntoPallets(layers, cfg.maxWeight, cfg.maxHeightMM);
+    render(pallets, cfg);
+    computeBtn.disabled = false;
+    computeBtn.textContent = 'Изчисли подреждане';
+  }, 50);
 });
 
 function explode(rows){
