@@ -10,4 +10,4 @@ Hooks into `woocommerce_cart_calculate_fees` and adds a negative fee line ("10% 
 
 Tested on a local WooCommerce install - cart with subtotal 240,00 EUR automatically gets a -24,00 EUR discount line, estimated total 216,00 EUR:
 
-<img width="500" alt="Cart with automatic 10% discount applied" src="https://github.com/user-attachments/assets/19780346-0bf3-4027-91c5-8a7a49f6b864" />
+<img width="600" alt="Cart with automatic 10% discount applied" src="https://github.com/user-attachments/assets/6bbb3b0d-cffb-48bc-a345-3834d7c1bb82" />
