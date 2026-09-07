@@ -12,4 +12,4 @@ Custom WordPress plugin adding a "Testimonial" content type with a star rating, 
 
 Tested on a local WooCommerce install - rendered output below:
 
-<img width="600" alt="Testimonials grid rendered on the frontend" src="https://github.com/user-attachments/assets/4bd5d6c4-006d-462a-87ff-8af9494fd352" />
+<img width="700" alt="Testimonials grid with 3 client reviews rendered on the frontend" src="https://github.com/user-attachments/assets/1bf95f93-03db-4110-af10-013d8210a6c4" />
