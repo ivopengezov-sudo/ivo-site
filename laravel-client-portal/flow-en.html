@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow: Laravel Client Portal</title>
+<meta name="description" content="How the Laravel document submission and review portal works — from client upload to authorization-checked deliverable download.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 80px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; line-height: 1.6; max-width: 640px; margin: 0 0 20px; }
+
+.legend { display: flex; gap: 22px; margin-bottom: 44px; font-size: 13px; color: #b8b8d1; }
+.legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+.legend .customer .dot { background: #4caf7d; }
+.legend .system .dot { background: #e94560; }
+
+.flow { position: relative; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(#4caf7d, #e94560 40%, #4caf7d 70%, #e94560);
+}
+.step {
+  position: relative;
+  padding-left: 58px;
+  margin-bottom: 30px;
+}
+.step .num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  background: #232342;
+  border: 2px solid #4caf7d;
+  color: #4caf7d;
+}
+.step.system .num { border-color: #e94560; color: #e94560; }
+.step .card {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.step h3 { margin: 0 0 6px; font-size: 16px; color: white; }
+.step p { margin: 0; font-size: 14px; color: #b8b8d1; line-height: 1.55; }
+.step .ref {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 11.5px;
+  color: #8888a8;
+  background: #1a1a2e;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+.status-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.status-pill {
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  background: #1a1a2e;
+  color: #b8b8d1;
+  border: 1px solid #343456;
+}
+.status-pill.active { color: #e94560; border-color: #e94560; }
+
+.highlight-box {
+  margin-top: 50px;
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+.highlight-box h2 { color: #e94560; font-size: 17px; margin: 0 0 14px; }
+.highlight-box ul { margin: 0; padding-left: 20px; color: #d8d8e8; font-size: 14px; line-height: 1.8; }
+.highlight-box code { background: #1a1a2e; color: #e94560; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+
+footer { margin-top: 50px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; back to portfolio</a>
+  <div class="badge">📐 Diagram of the real flow, from the code in this repo</div>
+  <h1>How the portal works</h1>
+  <p class="lede">The path of one project — from the client's initial document upload to an authorization-checked download of the finished files — exactly as implemented in the controllers.</p>
+
+  <div class="legend">
+    <span class="customer"><span class="dot"></span>Client</span>
+    <span class="system"><span class="dot"></span>Staff / system</span>
+  </div>
+
+  <div class="flow">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="card">
+        <h3>Submits a project with files</h3>
+        <p>Up to 20 files at once (PDF, DOC/DOCX, XLS/XLSX, PNG/JPG, ZIP), 25&nbsp;MB max each. The project starts with status "submitted".</p>
+        <span class="ref">ProjectController@store</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">2</div>
+      <div class="card">
+        <h3>Files are stored on a private disk</h3>
+        <p>Each file gets a randomly generated UUID name and lives outside any publicly reachable folder — there is no URL that just opens the file.</p>
+        <span class="ref">ProjectFileUploadService::storeOne()</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">3</div>
+      <div class="card">
+        <h3>Staff review and move the status</h3>
+        <p>A staff dashboard lists every project, filterable by status.</p>
+        <div class="status-row">
+          <span class="status-pill active">submitted</span>
+          <span class="status-pill">in progress</span>
+          <span class="status-pill">needs info</span>
+          <span class="status-pill">completed</span>
+        </div>
+        <span class="ref">Admin\ProjectController@updateStatus</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="card">
+        <h3>If needed — client adds more files</h3>
+        <p>If the status is "needs info", the client uploads additional documents and the project automatically moves back to "submitted".</p>
+        <span class="ref">ProjectController@storeFiles</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">5</div>
+      <div class="card">
+        <h3>Staff upload the finished files</h3>
+        <p>Final deliverables are tagged separately as "deliverables" — distinct from the client's original input files.</p>
+        <span class="ref">Admin\ProjectController@storeDeliverables</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">6</div>
+      <div class="card">
+        <h3>Client downloads the deliverables</h3>
+        <p>Every download goes through a check — does the requester own this project (or are they staff) — before the file is even read from disk.</p>
+        <span class="ref">ProjectFileController@download</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h2>Technical details</h2>
+    <ul>
+      <li>Files are never served directly — every download goes through a controller that checks authorization <em>before</em> reading the file from disk.</li>
+      <li>A client only ever sees their own projects (<code>Project::scopeForClient</code>) — requesting someone else's project returns 403, not 404, so it's clearly a permissions block, not a missing resource.</li>
+      <li>Every file's type and size are validated on upload — only known document formats are allowed, capped at 25&nbsp;MB per file.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Part of <a href="../index.html">Ivo Pengezov's portfolio</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">source code</a>
+  </footer>
+</div>
+</body>
+</html>

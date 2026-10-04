@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow: Laravel Appointment Booking System</title>
+<meta name="description" content="How the Laravel booking-and-payment system works — from picking a slot to Stripe webhook confirmation.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 80px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; line-height: 1.6; max-width: 640px; margin: 0 0 20px; }
+
+.legend { display: flex; gap: 22px; margin-bottom: 44px; font-size: 13px; color: #b8b8d1; }
+.legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+.legend .customer .dot { background: #4caf7d; }
+.legend .system .dot { background: #e94560; }
+
+.flow { position: relative; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(#4caf7d, #e94560 45%, #e94560);
+}
+.step {
+  position: relative;
+  padding-left: 58px;
+  margin-bottom: 30px;
+}
+.step .num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  background: #232342;
+  border: 2px solid #4caf7d;
+  color: #4caf7d;
+}
+.step.system .num { border-color: #e94560; color: #e94560; }
+.step .card {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.step h3 { margin: 0 0 6px; font-size: 16px; color: white; }
+.step p { margin: 0; font-size: 14px; color: #b8b8d1; line-height: 1.55; }
+.step .ref {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 11.5px;
+  color: #8888a8;
+  background: #1a1a2e;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+
+.highlight-box {
+  margin-top: 50px;
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+.highlight-box h2 { color: #e94560; font-size: 17px; margin: 0 0 14px; }
+.highlight-box ul { margin: 0; padding-left: 20px; color: #d8d8e8; font-size: 14px; line-height: 1.8; }
+.highlight-box code { background: #1a1a2e; color: #e94560; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+
+footer { margin-top: 50px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; back to portfolio</a>
+  <div class="badge">📐 Diagram of the real flow, from the code in this repo</div>
+  <h1>How a booking works</h1>
+  <p class="lede">The full path of one booking — from picking an open slot to confirmed payment — exactly as implemented in the controllers and webhook.</p>
+
+  <div class="legend">
+    <span class="customer"><span class="dot"></span>Customer</span>
+    <span class="system"><span class="dot"></span>System / staff</span>
+  </div>
+
+  <div class="flow">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="card">
+        <h3>Picks a service</h3>
+        <p>Sees a list of the business's active bookable services.</p>
+        <span class="ref">BookingController@index</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="card">
+        <h3>Picks an open time slot</h3>
+        <p>Slots are generated for business hours (9am&ndash;5pm) and already-booked ones are removed — computed on the fly, never cached.</p>
+        <span class="ref">BookingController@create — availableSlots()</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">3</div>
+      <div class="card">
+        <h3>Overlap check</h3>
+        <p>On submit, the server runs a real SQL check for whether the slot is already taken — prevents double-booking even from two simultaneous attempts.</p>
+        <span class="ref">Booking::scopeOverlapping()</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">4</div>
+      <div class="card">
+        <h3>Booking created as "pending"</h3>
+        <p>Saved to the database with a pending status, and a Stripe Checkout session is created for payment.</p>
+        <span class="ref">StripeCheckoutService::createSessionForBooking()</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">5</div>
+      <div class="card">
+        <h3>Pays via Stripe Checkout</h3>
+        <p>The customer is redirected to Stripe's own secure payment page.</p>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">6</div>
+      <div class="card">
+        <h3>Webhook confirms payment</h3>
+        <p>Stripe notifies the server directly (not through the customer's browser) — the request's signature is verified before the booking is marked paid.</p>
+        <span class="ref">StripeWebhookController@handle</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">7</div>
+      <div class="card">
+        <h3>Sees the confirmation</h3>
+        <p>A page with the booking's details — service, time, status.</p>
+        <span class="ref">BookingController@confirmation</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">8</div>
+      <div class="card">
+        <h3>Staff manage it from the dashboard</h3>
+        <p>A staff-only view (behind login + admin check) lists all bookings and allows changing status — e.g. to "completed" after the appointment.</p>
+        <span class="ref">Admin\DashboardController</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h2>Technical details</h2>
+    <ul>
+      <li>Double-booking is technically impossible — the check happens at the database level (<code>WHERE starts_at &lt; ? AND ends_at &gt; ?</code>), not only in the frontend.</li>
+      <li>The webhook route explicitly excludes CSRF protection (Stripe isn't a logged-in browser) and instead verifies the cryptographically signed <code>Stripe-Signature</code> header.</li>
+      <li>A cancelled booking frees up the slot again — it's excluded from the overlap check.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Part of <a href="../index.html">Ivo Pengezov's portfolio</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-booking-system/README.md" target="_blank" rel="noopener">source code</a>
+  </footer>
+</div>
+</body>
+</html>

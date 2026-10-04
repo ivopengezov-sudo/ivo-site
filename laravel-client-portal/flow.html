@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow: Laravel клиентски портал</title>
+<meta name="description" content="Как работи Laravel порталът за подаване и преглед на документи — от подаване на проект до защитено изтегляне на готовите файлове.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 80px;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; line-height: 1.6; max-width: 640px; margin: 0 0 20px; }
+
+.legend { display: flex; gap: 22px; margin-bottom: 44px; font-size: 13px; color: #b8b8d1; }
+.legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: middle; }
+.legend .customer .dot { background: #4caf7d; }
+.legend .system .dot { background: #e94560; }
+
+.flow { position: relative; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(#4caf7d, #e94560 40%, #4caf7d 70%, #e94560);
+}
+.step {
+  position: relative;
+  padding-left: 58px;
+  margin-bottom: 30px;
+}
+.step .num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  background: #232342;
+  border: 2px solid #4caf7d;
+  color: #4caf7d;
+}
+.step.system .num { border-color: #e94560; color: #e94560; }
+.step .card {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.step h3 { margin: 0 0 6px; font-size: 16px; color: white; }
+.step p { margin: 0; font-size: 14px; color: #b8b8d1; line-height: 1.55; }
+.step .ref {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 11.5px;
+  color: #8888a8;
+  background: #1a1a2e;
+  border-radius: 5px;
+  padding: 3px 8px;
+}
+.status-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.status-pill {
+  font-size: 12px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  background: #1a1a2e;
+  color: #b8b8d1;
+  border: 1px solid #343456;
+}
+.status-pill.active { color: #e94560; border-color: #e94560; }
+
+.highlight-box {
+  margin-top: 50px;
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+.highlight-box h2 { color: #e94560; font-size: 17px; margin: 0 0 14px; }
+.highlight-box ul { margin: 0; padding-left: 20px; color: #d8d8e8; font-size: 14px; line-height: 1.8; }
+.highlight-box code { background: #1a1a2e; color: #e94560; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+
+footer { margin-top: 50px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index-bg.html">&larr; обратно към портфолиото</a>
+  <div class="badge">📐 Диаграма на реалния flow, по кода в репото</div>
+  <h1>Как работи порталът</h1>
+  <p class="lede">Пътят на един проект — от подаване на документи от клиента до защитено изтегляне на готовите файлове — точно както е имплементирано в контролерите.</p>
+
+  <div class="legend">
+    <span class="customer"><span class="dot"></span>Клиент</span>
+    <span class="system"><span class="dot"></span>Персонал / система</span>
+  </div>
+
+  <div class="flow">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="card">
+        <h3>Подава проект с файлове</h3>
+        <p>До 20 файла наведнъж (PDF, DOC/DOCX, XLS/XLSX, PNG/JPG, ZIP), макс. 25&nbsp;MB всеки. Проектът влиза със статус "подаден".</p>
+        <span class="ref">ProjectController@store</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">2</div>
+      <div class="card">
+        <h3>Файловете се записват на частен диск</h3>
+        <p>Всеки файл получава случайно генерирано UUID име и се пази извън публично достъпните папки — не съществува URL, който просто да отвори файла.</p>
+        <span class="ref">ProjectFileUploadService::storeOne()</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">3</div>
+      <div class="card">
+        <h3>Персоналът преглежда и движи статуса</h3>
+        <p>Служебно табло показва всички проекти с филтър по статус.</p>
+        <div class="status-row">
+          <span class="status-pill active">подаден</span>
+          <span class="status-pill">в прогрес</span>
+          <span class="status-pill">нужна информация</span>
+          <span class="status-pill">завършен</span>
+        </div>
+        <span class="ref">Admin\ProjectController@updateStatus</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="card">
+        <h3>При нужда — клиентът добавя файлове</h3>
+        <p>Ако статусът е "нужна информация", клиентът качва допълнителни документи и проектът автоматично се връща на "подаден".</p>
+        <span class="ref">ProjectController@storeFiles</span>
+      </div>
+    </div>
+    <div class="step system">
+      <div class="num">5</div>
+      <div class="card">
+        <h3>Персоналът качва готовите файлове</h3>
+        <p>Крайните документи се маркират отделно като "deliverables" — различни от входните файлове на клиента.</p>
+        <span class="ref">Admin\ProjectController@storeDeliverables</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">6</div>
+      <div class="card">
+        <h3>Клиентът изтегля готовите файлове</h3>
+        <p>Всяко изтегляне минава през проверка — собственик на проекта ли е заявителят (или е персонал) — преди файлът изобщо да бъде прочетен от диска.</p>
+        <span class="ref">ProjectFileController@download</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h2>Технически детайли</h2>
+    <ul>
+      <li>Файловете никога не се сервират директно — всяко изтегляне минава през контролер, който проверява правата <em>преди</em> да прочете файла от диска.</li>
+      <li>Клиент вижда само собствените си проекти (<code>Project::scopeForClient</code>) — заявка за чужд проект връща 403, не 404, за да е ясно, че е забрана, не липсващ ресурс.</li>
+      <li>Типът и размерът на всеки файл се валидират при качване — разрешени са само познати документни формати, лимит 25&nbsp;MB на файл.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Част от <a href="../index-bg.html">портфолиото на Иво Пенгезов</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">изходен код</a>
+  </footer>
+</div>
+</body>
+</html>
