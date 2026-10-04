@@ -118,7 +118,7 @@ function ivo_testimonials_shortcode($atts) {
         $author  = get_post_meta(get_the_ID(), '_ivo_author_name', true);
         $company = get_post_meta(get_the_ID(), '_ivo_author_company', true);
         $rating  = (int) get_post_meta(get_the_ID(), '_ivo_rating', true) ?: 5;
-        $stars   = str_repeat('â', $rating) . str_repeat('â', 5 - $rating);
+        $stars   = str_repeat('★', $rating) . str_repeat('☆', 5 - $rating);
 
         $output .= '<div class="ivo-testimonial-card" style="border:1px solid #e0e0e0;border-radius:8px;padding:20px;">';
         $output .= '<div class="ivo-testimonial-stars" style="color:#f5a623;">' . $stars . '</div>';
