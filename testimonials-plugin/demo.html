@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо: [testimonials] shortcode — Ivo Testimonials &amp; Reviews</title>
+<meta name="description" content="Жив рендер на изхода на [testimonials] shortcode от WordPress плъгина Ivo Testimonials &amp; Reviews.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 70px;
+}
+.wrap { max-width: 900px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; max-width: 640px; line-height: 1.6; margin: 0 0 10px; }
+code {
+  background: #232342;
+  color: #e94560;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.shortcode-box {
+  background: #232342;
+  border: 1px dashed #4a4a6a;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #b8b8d1;
+  margin: 24px 0 40px;
+}
+.shortcode-box .tag { color: #e94560; }
+
+/* --- everything below reproduces the plugin's actual shortcode output ---
+   grid / card markup matches ivo-testimonials-grid / ivo-testimonial-card
+   from testimonials-plugin.php; only the CSS is new (a theme would supply
+   this normally - the plugin itself only outputs bare inline grid styles). */
+.ivo-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 760px) {
+  .ivo-testimonials-grid { grid-template-columns: 1fr; }
+}
+.ivo-testimonial-card {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.ivo-testimonial-stars {
+  color: #f5a623;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.ivo-testimonial-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e4e4f0;
+  flex-grow: 1;
+  margin: 0 0 18px;
+}
+.ivo-testimonial-text p { margin: 0; }
+.ivo-testimonial-author {
+  font-size: 14px;
+  color: #b8b8d1;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid #343456;
+}
+.ivo-testimonial-author strong { color: white; }
+
+footer { margin-top: 60px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index-bg.html">&larr; обратно към портфолиото</a>
+  <div class="badge">⚡ Жив рендер на shortcode изхода, не скрийншот</div>
+  <h1>[testimonials] shortcode</h1>
+  <p class="lede">Това е реалната грид структура и класове, които плъгинът извежда — <code>ivo-testimonials-grid</code> / <code>ivo-testimonial-card</code> — стилизирани както би изглеждало в тема на клиентски сайт. Данните по-долу са примерни.</p>
+  <div class="shortcode-box"><span class="tag">[testimonials</span> count="3" columns="3"<span class="tag">]</span></div>
+
+  <div class="ivo-testimonials-grid">
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★★</div>
+      <div class="ivo-testimonial-text"><p>Поръчахме автоматизация за нашия WooCommerce магазин и всичко мина гладко — ясна комуникация, спазен срок, код, който продължава да работи месеци по-късно без нито един проблем.</p></div>
+      <p class="ivo-testimonial-author"><strong>Николай Петров</strong> &mdash; собственик, онлайн магазин за инструменти</p>
+    </div>
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★★</div>
+      <div class="ivo-testimonial-text"><p>Търсехме някой, който разбира и производство, и софтуер — рядка комбинация. Решението за оптимизация на палетизирането директно спести складово пространство от първата седмица.</p></div>
+      <p class="ivo-testimonial-author"><strong>Мария Георгиева</strong> &mdash; оперативен мениджър, металообработващ цех</p>
+    </div>
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★☆</div>
+      <div class="ivo-testimonial-text"><p>Laravel порталът за документи замени три отделни имейл нишки с едно място, където всички виждат статуса на проекта. Малка добавка, но спести часове седмично.</p></div>
+      <p class="ivo-testimonial-author"><strong>Стефан Иванов</strong> &mdash; ръководител проекти</p>
+    </div>
+  </div>
+
+  <footer>
+    Част от <a href="../index-bg.html">портфолиото на Иво Пенгезов</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/testimonials-plugin/testimonials-plugin.php" target="_blank" rel="noopener">изходен код на плъгина</a>
+  </footer>
+</div>
+</body>
+</html>

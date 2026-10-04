@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Демо: Ivo - Automatic Cart Discount (WooCommerce)</title>
+<meta name="description" content="Интерактивна симулация на WooCommerce плъгина Ivo - Automatic Cart Discount: автоматична 10% отстъпка над 100 лв. в кошницата.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 70px;
+}
+.wrap { max-width: 640px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; line-height: 1.6; margin: 0 0 10px; }
+code {
+  background: #2a2a46;
+  color: #e94560;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.cart {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  margin-top: 34px;
+  overflow: hidden;
+}
+.cart-head {
+  padding: 18px 24px;
+  border-bottom: 1px solid #343456;
+  font-weight: bold;
+  font-size: 15px;
+  color: #b8b8d1;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #2c2c48;
+}
+.line:last-of-type { border-bottom: none; }
+.line .name { flex: 1; font-size: 15px; }
+.line .name small { display: block; color: #8888a8; font-size: 12.5px; margin-top: 2px; }
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 4px 6px;
+}
+.qty button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: #343456;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+.qty button:hover { background: #e94560; }
+.qty span { min-width: 18px; text-align: center; font-size: 14px; }
+.line .price { width: 90px; text-align: right; font-size: 15px; font-variant-numeric: tabular-nums; }
+
+.totals { padding: 20px 24px 24px; }
+.totals .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  padding: 7px 0;
+  font-variant-numeric: tabular-nums;
+}
+.totals .row.subtotal { color: #b8b8d1; }
+.totals .row.fee {
+  color: #4caf7d;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.25s ease;
+}
+.totals .row.fee.show { opacity: 1; max-height: 40px; }
+.totals .row.total {
+  border-top: 1px solid #343456;
+  margin-top: 8px;
+  padding-top: 14px;
+  font-size: 19px;
+  font-weight: bold;
+  color: white;
+}
+.threshold-note {
+  text-align: center;
+  font-size: 13px;
+  color: #8888a8;
+  padding: 0 24px 22px;
+}
+.threshold-note strong { color: #e94560; }
+
+footer { margin-top: 50px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index-bg.html">&larr; обратно към портфолиото</a>
+  <div class="badge">⚡ Интерактивна симулация на реалната логика на плъгина</div>
+  <h1>Ivo - Automatic Cart Discount</h1>
+  <p class="lede">Променяй количествата по-долу — щом сумата в кошницата премине <strong style="color:#e94560;">100,00&nbsp;лв.</strong>, автоматично се появява ред с 10% отстъпка, точно както прави <code>woocommerce_cart_calculate_fees</code> hook-ът в реалния плъгин.</p>
+
+  <div class="cart">
+    <div class="cart-head">Кошница</div>
+
+    <div class="line">
+      <div class="name">Комплект свредла HSS<small>45,00 лв. / бр.</small></div>
+      <div class="qty"><button data-dir="-1" data-price="45">&minus;</button><span>1</span><button data-dir="1" data-price="45">+</button></div>
+      <div class="price num" data-line="45">45,00 лв.</div>
+    </div>
+    <div class="line">
+      <div class="name">Твърдосплавна фреза Ø12<small>38,00 лв. / бр.</small></div>
+      <div class="qty"><button data-dir="-1" data-price="38">&minus;</button><span>1</span><button data-dir="1" data-price="38">+</button></div>
+      <div class="price num" data-line="38">38,00 лв.</div>
+    </div>
+    <div class="line">
+      <div class="name">Метчик M8x1.25<small>12,00 лв. / бр.</small></div>
+      <div class="qty"><button data-dir="-1" data-price="12">&minus;</button><span>0</span><button data-dir="1" data-price="12">+</button></div>
+      <div class="price num" data-line="12">0,00 лв.</div>
+    </div>
+
+    <div class="totals">
+      <div class="row subtotal"><span>Междинна сума</span><span id="subtotal">83,00 лв.</span></div>
+      <div class="row fee" id="fee-row"><span>10% отстъпка (над 100)</span><span id="fee-amount">&minus;0,00 лв.</span></div>
+      <div class="row total"><span>Общо</span><span id="total">83,00 лв.</span></div>
+    </div>
+    <div class="threshold-note" id="threshold-note">Добави още за <strong>17,00 лв.</strong>, за да се включи 10% отстъпка.</div>
+  </div>
+
+  <footer>
+    Част от <a href="../index-bg.html">портфолиото на Иво Пенгезов</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">изходен код на плъгина</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var fmt = function (n) { return n.toLocaleString('bg-BG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' лв.'; };
+  var qtyEls = document.querySelectorAll('.qty');
+
+  function recalc() {
+    var subtotal = 0;
+    qtyEls.forEach(function (q) {
+      var price = parseFloat(q.querySelector('button').dataset.price);
+      var qty = parseInt(q.querySelector('span').textContent, 10);
+      var lineTotal = price * qty;
+      q.parentElement.querySelector('.price').textContent = fmt(lineTotal);
+      subtotal += lineTotal;
+    });
+
+    document.getElementById('subtotal').textContent = fmt(subtotal);
+
+    var feeRow = document.getElementById('fee-row');
+    var note = document.getElementById('threshold-note');
+    var total = subtotal;
+
+    // Mirrors discount-plugin.php exactly: subtotal > 100 -> -10% fee.
+    if (subtotal > 100) {
+      var fee = subtotal * 0.10;
+      document.getElementById('fee-amount').textContent = '−' + fmt(fee);
+      feeRow.classList.add('show');
+      total = subtotal - fee;
+      note.innerHTML = '10% отстъпка е <strong>приложена</strong> автоматично.';
+    } else {
+      feeRow.classList.remove('show');
+      var remaining = (100 - subtotal + 0.01).toFixed(2).replace('.', ',');
+      note.innerHTML = 'Добави още за <strong>' + remaining + ' лв.</strong>, за да се включи 10% отстъпка.';
+    }
+
+    document.getElementById('total').textContent = fmt(total);
+  }
+
+  document.querySelectorAll('.qty button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var span = btn.parentElement.querySelector('span');
+      var val = parseInt(span.textContent, 10) + parseInt(btn.dataset.dir, 10);
+      span.textContent = Math.max(0, val);
+      recalc();
+    });
+  });
+
+  recalc();
+})();
+</script>
+</body>
+</html>

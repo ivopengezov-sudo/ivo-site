@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo: [testimonials] shortcode — Ivo Testimonials &amp; Reviews</title>
+<meta name="description" content="Live render of the [testimonials] shortcode output from the Ivo Testimonials &amp; Reviews WordPress plugin.">
+<style>
+body {
+  background-color: #1a1a2e;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 50px 20px 70px;
+}
+.wrap { max-width: 900px; margin: 0 auto; }
+.back {
+  display: inline-block;
+  color: #b8b8d1;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+.back:hover { color: #e94560; }
+.badge {
+  display: inline-block;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+h1 { color: #e94560; font-size: 32px; margin: 0 0 10px; }
+p.lede { color: #b8b8d1; font-size: 16px; max-width: 640px; line-height: 1.6; margin: 0 0 10px; }
+code {
+  background: #232342;
+  color: #e94560;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.shortcode-box {
+  background: #232342;
+  border: 1px dashed #4a4a6a;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: monospace;
+  font-size: 14px;
+  color: #b8b8d1;
+  margin: 24px 0 40px;
+}
+.shortcode-box .tag { color: #e94560; }
+
+.ivo-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 760px) {
+  .ivo-testimonials-grid { grid-template-columns: 1fr; }
+}
+.ivo-testimonial-card {
+  background: #232342;
+  border: 1px solid #343456;
+  border-radius: 14px;
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.ivo-testimonial-stars {
+  color: #f5a623;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.ivo-testimonial-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e4e4f0;
+  flex-grow: 1;
+  margin: 0 0 18px;
+}
+.ivo-testimonial-text p { margin: 0; }
+.ivo-testimonial-author {
+  font-size: 14px;
+  color: #b8b8d1;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 1px solid #343456;
+}
+.ivo-testimonial-author strong { color: white; }
+
+footer { margin-top: 60px; color: #6c6c8a; font-size: 13px; text-align: center; }
+footer a { color: #6c6c8a; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">&larr; back to portfolio</a>
+  <div class="badge">⚡ Live render of the shortcode output, not a screenshot</div>
+  <h1>[testimonials] shortcode</h1>
+  <p class="lede">This is the actual grid markup and classes the plugin outputs — <code>ivo-testimonials-grid</code> / <code>ivo-testimonial-card</code> — styled the way a client site's theme would. The data below is sample content.</p>
+  <div class="shortcode-box"><span class="tag">[testimonials</span> count="3" columns="3"<span class="tag">]</span></div>
+
+  <div class="ivo-testimonials-grid">
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★★</div>
+      <div class="ivo-testimonial-text"><p>We hired Ivo for an automation project on our WooCommerce store and everything went smoothly — clear communication, delivered on time, and code that's still running months later without a single issue.</p></div>
+      <p class="ivo-testimonial-author"><strong>Nikolay Petrov</strong> &mdash; owner, online tool shop</p>
+    </div>
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★★</div>
+      <div class="ivo-testimonial-text"><p>We needed someone who understands both manufacturing and software — a rare combination. The pallet-nesting optimization saved warehouse space from the very first week.</p></div>
+      <p class="ivo-testimonial-author"><strong>Maria Georgieva</strong> &mdash; operations manager, metalworking shop</p>
+    </div>
+    <div class="ivo-testimonial-card">
+      <div class="ivo-testimonial-stars">★★★★☆</div>
+      <div class="ivo-testimonial-text"><p>The Laravel document portal replaced three separate email threads with one place everyone can see project status in. A small addition, but it saves hours every week.</p></div>
+      <p class="ivo-testimonial-author"><strong>Stefan Ivanov</strong> &mdash; project manager</p>
+    </div>
+  </div>
+
+  <footer>
+    Part of <a href="../index.html">Ivo Pengezov's portfolio</a> &middot;
+    <a href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/testimonials-plugin/testimonials-plugin.php" target="_blank" rel="noopener">plugin source code</a>
+  </footer>
+</div>
+</body>
+</html>
