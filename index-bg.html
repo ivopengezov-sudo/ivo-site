@@ -8,7 +8,7 @@ background-color: #1a1a2e;
 color: white;
 font-family: Arial;
 text-align: center;
-padding: 50px 20px;
+padding: 90px 20px 50px;
 }
 
 h1 {
@@ -116,9 +116,6 @@ font-size: 14px;
 }
 
 .lang-switch {
-position: fixed;
-top: 20px;
-right: 20px;
 color: #b8b8d1;
 text-decoration: none;
 font-size: 14px;
@@ -131,10 +128,56 @@ border-radius: 20px;
 color: #e94560;
 border-color: #e94560;
 }
+
+html {
+scroll-behavior: smooth;
+}
+
+section {
+scroll-margin-top: 70px;
+}
+
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 100;
+background-color: #141428;
+border-bottom: 1px solid #2a2a4a;
+padding: 14px 20px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+gap: 24px;
+}
+
+.navbar a {
+color: #b8b8d1;
+text-decoration: none;
+font-size: 15px;
+}
+
+.navbar a:hover {
+color: #e94560;
+}
+
+.navbar a.lang-switch {
+padding: 4px 14px;
+}
 </style>
 </head>
 <body>
+<nav class="navbar">
+<a href="#about">За мен</a>
+<a href="#technologies">Технологии</a>
+<a href="#projects">Проекти</a>
+<a href="#contact">Контакти</a>
 <a class="lang-switch" href="index.html">EN</a>
+</nav>
+
+<section id="about">
 <img class="avatar" src="foto.jpg" width="200">
 <h1>Иво Пенгезов</h1>
 <p class="tagline">Самостоятелен уеб разработчик (Laravel/PHP, WordPress/WooCommerce) &middot; CNC машинист и програмист</p>
@@ -143,7 +186,9 @@ border-color: #e94560;
 
 <a class="button" href="mailto:ivopengezov@gmail.com">📧 Свържи се с мен</a>
 <a class="button" href="tel:+358452253366">📞 +358 452 253 366</a>
+</section>
 
+<section id="technologies">
 <h2>Уеб разработка</h2>
 <p>PHP/Laravel и WordPress/WooCommerce разработчик. Проектирам и изграждам работещи бизнес приложения и онлайн магазини от нулата — база данни, административен панел, потребителски интерфейс — и ги поддържам в реална експлоатация.</p>
 
@@ -157,6 +202,22 @@ border-color: #e94560;
 <span class="skill-tag">WordPress</span>
 <span class="skill-tag">WooCommerce</span>
 </div>
+
+<h2>CNC и машиностроене</h2>
+<p>Над 20 години опит в CNC машиностроене и програмиране — от технически чертеж до готов детайл, включително като подизпълнител на Rolls-Royce.</p>
+
+<div class="skills">
+<span class="skill-tag">Mastercam</span>
+<span class="skill-tag">Fanuc</span>
+<span class="skill-tag">Heidenhain</span>
+<span class="skill-tag">Siemens</span>
+<span class="skill-tag">CNC фрезоване</span>
+<span class="skill-tag">CNC програмиране</span>
+</div>
+</section>
+
+<section id="projects">
+<h2>Проекти</h2>
 
 <div class="project-card">
 <h3>PaletPlaner</h3>
@@ -220,6 +281,14 @@ border-color: #e94560;
 <a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">💻 Виж кода</a>
 </div>
 </div>
+</section>
+
+<section id="contact">
+<h2>Да работим заедно</h2>
+<p>Отворен съм за нови проекти — уеб разработка или CNC програмиране.</p>
+<a class="button" href="mailto:ivopengezov@gmail.com">📧 Свържи се с мен</a>
+<a class="button" href="tel:+358452253366">📞 +358 452 253 366</a>
+</section>
 
 <footer>&copy; Иво Пенгезов</footer>
 </body>
