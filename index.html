@@ -166,6 +166,56 @@ color: #e94560;
 .navbar a.lang-switch {
 padding: 4px 14px;
 }
+
+.flagship-grid {
+max-width: 1100px;
+margin: 0 auto 10px auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+text-align: left;
+}
+
+@media (max-width: 900px) {
+.flagship-grid {
+grid-template-columns: 1fr;
+max-width: 400px;
+}
+}
+
+.flagship-card {
+background-color: #232342;
+border-radius: 16px;
+padding: 24px;
+display: flex;
+flex-direction: column;
+}
+
+.flagship-card img.project-shot {
+width: 100%;
+border-radius: 10px;
+display: block;
+margin-bottom: 16px;
+}
+
+.flagship-card h3 {
+color: #e94560;
+margin-top: 0;
+font-size: 20px;
+}
+
+.flagship-card p {
+margin: 0 0 16px 0;
+font-size: 15px;
+max-width: none;
+flex-grow: 1;
+}
+
+.flagship-card .project-links a.button {
+padding: 8px 18px;
+font-size: 14px;
+margin: 4px 6px 0 0;
+}
 </style>
 </head>
 <body>
@@ -217,71 +267,41 @@ padding: 4px 14px;
 </section>
 
 <section id="projects">
-<h2>Projects</h2>
+<h2>Flagship Projects</h2>
+<p>A quick look at the three that best show what I do — see below for all of them.</p>
 
-<div class="project-card">
-<h3>PaletPlaner</h3>
-<p>Packing irregular sheet-metal parts onto pallets for shipping used to be a manual, eyeball-it decision — often wasting pallet space. PaletPlaner reads the real part shapes from uploaded DXF files and automatically computes the optimal multi-pallet layout, respecting real weight limits and stacking height. Designed and developed entirely independently, in real daily use — now expanding toward a subscription tool for other machine shops.</p>
+<div class="flagship-grid">
+<div class="flagship-card">
 <img class="project-shot" src="palet-planer/screenshot.svg" alt="A pallet layer nesting rectangles, L-shapes and circles by their real outlines">
+<h3>PaletPlaner</h3>
+<p>Sheet-metal parts used to be palletized by eye, wasting space. PaletPlaner reads real DXF shapes and computes the optimal multi-pallet layout automatically.</p>
 <div class="project-links">
 <a class="button" href="https://app.paletplaner.com" target="_blank" rel="noopener">🚀 View the app</a>
-<a class="button" href="palet-planer/index.html">🧩 Demo version</a>
+<a class="button" href="palet-planer/index.html">🧩 Demo</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Machining Time — CNC Calculator</h3>
-<p>Estimating machining time from a technical drawing is usually a manual, experience-based guess — easy to get wrong on parts combining drilling, milling and tapping. This tool reads a PDF drawing with AI — recognizing holes, threads, contours and tolerances — and feeds the data straight into a calculator that computes real machining time using the shop's own tools, materials and machines, not generic defaults. Fully bilingual interface (Bulgarian/English).</p>
+<div class="flagship-card">
+<img class="project-shot" src="machining-time/screenshot.png" alt="Machining Time landing page listing AI drawing recognition, the time calculator, and tool/machine/material libraries">
+<h3>Machining Time</h3>
+<p>Estimating machining time from a drawing is usually manual guesswork. AI reads the PDF and the calculator computes real time from your own tools and machines.</p>
 <div class="project-links">
 <a class="button" href="https://machining-time-web-production.up.railway.app" target="_blank" rel="noopener">🚀 View the app</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Kamenna Stryaha — Guesthouse Demo Site</h3>
-<p>Small family-run guesthouses often have no site of their own, relying only on a Booking.com listing — with no story about the place, the rooms, or the kitchen to convince a visitor to book directly. A demo site for a guesthouse in the Rhodope Mountains (built 1912, three rooms, Rhodope cuisine) — presenting the rooms, a date picker for booking inquiries, and the location. Built to show what a proper online presence looks like for a small family hospitality business.</p>
-<div class="project-links">
-<a class="button" href="kamenna-stryaha.html" target="_blank" rel="noopener">🧩 Demo version</a>
-</div>
-</div>
-
-<div class="project-card">
-<h3>WooCommerce Discount Plugin</h3>
-<p>Manually creating and updating coupon codes for volume discounts is easy to forget and easy to get wrong. This plugin removes that step entirely — once a customer's cart subtotal crosses a configurable threshold, a 10% discount is applied automatically as a cart fee, no coupon code needed. Built with WooCommerce's native cart hook (woocommerce_cart_calculate_fees) and tested on a live WooCommerce store.</p>
+<div class="flagship-card">
 <img class="project-shot" src="https://github.com/user-attachments/assets/6bbb3b0d-cffb-48bc-a345-3834d7c1bb82" alt="Cart with automatic 10% discount applied">
-  <div class="project-links">
+<h3>WooCommerce Discount Plugin</h3>
+<p>Manually managing volume-discount coupons is easy to get wrong. This plugin applies the discount automatically once the cart crosses a threshold — no code needed.</p>
+<div class="project-links">
 <a class="button" href="woocommerce-discount-plugin/demo-en.html">🧩 Live demo</a>
-  <a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 View source code</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 Source</a>
 </div>
-</div>
-
-<div class="project-card">
-<h3>WordPress Testimonials Plugin</h3>
-<p>Client testimonials scattered across emails, screenshots, and a generic contact-form plugin are hard to keep organized and even harder to display consistently. This plugin gives testimonials their own structured content type — author name, role, and star rating — rendered through a simple shortcode into a responsive grid, plus a REST endpoint for pulling the same data into a headless frontend.</p>
-<img class="project-shot" src="testimonials-plugin/screenshot.png" alt="Testimonials grid with 3 fictional bakery reviews rendered on the frontend">
-  <div class="project-links">
-<a class="button" href="testimonials-plugin/demo-en.html">🧩 Live demo</a>
-  <a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/testimonials-plugin/testimonials-plugin.php" target="_blank" rel="noopener">💻 View source code</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Laravel Appointment Booking System</h3>
-<p>A Laravel booking-and-payment demo: customers pick a service and an open time slot, pay via Stripe Checkout, and a webhook confirms the booking once payment clears. Double-booking is prevented with a real SQL overlap check, and a staff dashboard lists and manages all bookings.</p>
-<div class="project-links">
-<a class="button" href="laravel-booking-system/flow-en.html">📐 See how it works</a>
-<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-booking-system/README.md" target="_blank" rel="noopener">💻 View source code</a>
-</div>
-</div>
-
-<div class="project-card">
-<h3>Laravel Client Portal</h3>
-<p>A Laravel document submission &amp; review portal: clients submit a project with supporting files, staff review and move it through a status workflow, and finished deliverables come back through the same portal. Files live on a private disk — every download is authorization-checked, never served by a guessable URL.</p>
-<div class="project-links">
-<a class="button" href="laravel-client-portal/flow-en.html">📐 See how it works</a>
-<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">💻 View source code</a>
-</div>
-</div>
+<a class="button" href="projects.html">📂 See all projects →</a>
 </section>
 
 <section id="contact">

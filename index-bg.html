@@ -166,6 +166,56 @@ color: #e94560;
 .navbar a.lang-switch {
 padding: 4px 14px;
 }
+
+.flagship-grid {
+max-width: 1100px;
+margin: 0 auto 10px auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+text-align: left;
+}
+
+@media (max-width: 900px) {
+.flagship-grid {
+grid-template-columns: 1fr;
+max-width: 400px;
+}
+}
+
+.flagship-card {
+background-color: #232342;
+border-radius: 16px;
+padding: 24px;
+display: flex;
+flex-direction: column;
+}
+
+.flagship-card img.project-shot {
+width: 100%;
+border-radius: 10px;
+display: block;
+margin-bottom: 16px;
+}
+
+.flagship-card h3 {
+color: #e94560;
+margin-top: 0;
+font-size: 20px;
+}
+
+.flagship-card p {
+margin: 0 0 16px 0;
+font-size: 15px;
+max-width: none;
+flex-grow: 1;
+}
+
+.flagship-card .project-links a.button {
+padding: 8px 18px;
+font-size: 14px;
+margin: 4px 6px 0 0;
+}
 </style>
 </head>
 <body>
@@ -217,71 +267,41 @@ padding: 4px 14px;
 </section>
 
 <section id="projects">
-<h2>Проекти</h2>
+<h2>Флагмански проекти</h2>
+<p>Трите, които най-добре показват какво правя — всички останали са по-долу.</p>
 
-<div class="project-card">
-<h3>PaletPlaner</h3>
-<p>Подреждането на нестандартни детайли от ламарина върху палети за транспорт се решаваше на око — често с пропиляно място. PaletPlaner чете реалната форма на детайлите от качени DXF файлове и автоматично изчислява оптимално подреждане в няколко палета, спазвайки реални лимити за тегло и височина на стифиране. Проектирано и разработено изцяло самостоятелно, в реална ежедневна употреба — вече се разширява като абонаментен инструмент за други цехове.</p>
+<div class="flagship-grid">
+<div class="flagship-card">
 <img class="project-shot" src="palet-planer/screenshot.svg" alt="Слой от палет с подредени правоъгълници, L-форми и кръгове по реалните им очертания">
+<h3>PaletPlaner</h3>
+<p>Детайли от ламарина се палетизираха на око, с пропиляно място. PaletPlaner чете реалната DXF форма и смята оптималното подреждане автоматично.</p>
 <div class="project-links">
 <a class="button" href="https://app.paletplaner.com" target="_blank" rel="noopener">🚀 Виж приложението</a>
-<a class="button" href="palet-planer/index.html">🧩 Демо версия</a>
+<a class="button" href="palet-planer/index.html">🧩 Демо</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Машинно време — CNC калкулатор</h3>
-<p>Оценката на машинно време от технически чертеж обикновено отнема експертно пресмятане "на око" — лесно за грешка при детайли с комбинация от пробиване, фрезоване и резба. Инструментът чете PDF чертеж чрез AI — разпознава дупки, резби, контури и допуски — и прехвърля данните директно в калкулатор, който смята реално машинно време по инструментите, материалите и машините на конкретния цех, не по генерични стойности. Пълен двуезичен интерфейс (български/английски).</p>
+<div class="flagship-card">
+<img class="project-shot" src="machining-time/screenshot.png" alt="Началната страница на Машинно време с AI разпознаване на чертежи, калкулатора и библиотеките с инструменти/машини/материали">
+<h3>Машинно време</h3>
+<p>Оценката на машинно време от чертеж обикновено е ръчно гадаене. AI чете PDF-а, а калкулаторът смята реално време по вашите инструменти и машини.</p>
 <div class="project-links">
 <a class="button" href="https://machining-time-web-production.up.railway.app" target="_blank" rel="noopener">🚀 Виж приложението</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Каменна стряха — демо сайт за къща за гости</h3>
-<p>Малките семейни къщи за гости често нямат собствен сайт и разчитат само на обява в Booking.com — без разказ за мястото, стаите и кухнята, който да убеди посетителя да резервира направо. Демо сайт за къща за гости в Родопите (построена 1912 г., три стаи, родопска кухня) — с представяне на стаите, избор на дати за запитване за резервация и локация. Изграден, за да покаже как изглежда професионално онлайн присъствие за малък семеен бизнес в туризма.</p>
-<div class="project-links">
-<a class="button" href="kamenna-stryaha.html" target="_blank" rel="noopener">🧩 Демо версия</a>
-</div>
-</div>
-
-<div class="project-card">
-<h3>WooCommerce плъгин за отстъпки</h3>
-<p>Ръчното създаване и подновяване на промо кодове за отстъпки лесно се пропуска или сгрешава. Този плъгин премахва тази стъпка напълно — щом сумата в кошницата премине зададен праг, автоматично се прилага 10% отстъпка като такса в кошницата, без нужда от промо код. Изграден с реалния WooCommerce hook (woocommerce_cart_calculate_fees) и тестван на реален WooCommerce магазин.</p>
+<div class="flagship-card">
 <img class="project-shot" src="https://github.com/user-attachments/assets/6bbb3b0d-cffb-48bc-a345-3834d7c1bb82" alt="Кошница с автоматична 10% отстъпка">
-  <div class="project-links">
+<h3>WooCommerce плъгин за отстъпки</h3>
+<p>Ръчното управление на промо кодове за отстъпки лесно се обърква. Плъгинът прилага отстъпката автоматично при праг в кошницата — без код.</p>
+<div class="project-links">
 <a class="button" href="woocommerce-discount-plugin/demo.html">🧩 Демо версия</a>
-  <a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 Виж кода</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 Код</a>
 </div>
-</div>
-
-<div class="project-card">
-<h3>WordPress плъгин за препоръки</h3>
-<p>Клиентски препоръки, пръснати по имейли, скрийншоти и общ плъгин за контактна форма, трудно се организират и още по-трудно се показват еднакво. Този плъгин дава на препоръките собствен структуриран тип съдържание — име на автор, роля и рейтинг в звезди — визуализиран чрез прост shortcode в отзивчива решетка, плюс REST endpoint за изтегляне на същите данни в headless фронтенд.</p>
-<img class="project-shot" src="testimonials-plugin/screenshot.png" alt="Решетка с 3 примерни отзива за измислена пекарна на фронтенда">
-  <div class="project-links">
-<a class="button" href="testimonials-plugin/demo.html">🧩 Демо версия</a>
-  <a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/testimonials-plugin/testimonials-plugin.php" target="_blank" rel="noopener">💻 Виж кода</a>
 </div>
 </div>
 
-<div class="project-card">
-<h3>Laravel система за резервации</h3>
-<p>Демо на Laravel система за резервации и плащания: клиентите избират услуга и свободен час, плащат през Stripe Checkout, а webhook потвърждава резервацията след успешно плащане. Двойно записване е предотвратено с реална SQL проверка за застъпване, а служебен админ панел показва и управлява всички резервации.</p>
-<div class="project-links">
-<a class="button" href="laravel-booking-system/flow.html">📐 Виж как работи</a>
-<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-booking-system/README.md" target="_blank" rel="noopener">💻 Виж кода</a>
-</div>
-</div>
-
-<div class="project-card">
-<h3>Laravel клиентски портал</h3>
-<p>Laravel портал за подаване и преглед на документи: клиентите подават проект с придружаващи файлове, служителите го преглеждат и преместват през работен процес по статус, а готовите файлове се връщат през същия портал. Файловете се съхраняват на частен диск — всяко изтегляне минава през проверка за права, никога през отгатваем URL адрес.</p>
-<div class="project-links">
-<a class="button" href="laravel-client-portal/flow.html">📐 Виж как работи</a>
-<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">💻 Виж кода</a>
-</div>
-</div>
+<a class="button" href="projects-bg.html">📂 Всички проекти →</a>
 </section>
 
 <section id="contact">
