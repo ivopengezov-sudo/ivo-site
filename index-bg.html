@@ -216,6 +216,28 @@ padding: 8px 18px;
 font-size: 14px;
 margin: 4px 6px 0 0;
 }
+
+.contact-fallback {
+font-size: 14px;
+color: #b8b8d1;
+margin-top: 4px;
+}
+
+.copy-btn {
+font: inherit;
+color: #b8b8d1;
+background: none;
+border: 1px solid #6c6c8a;
+border-radius: 20px;
+padding: 3px 12px;
+margin-left: 8px;
+cursor: pointer;
+}
+
+.copy-btn:hover {
+color: #e94560;
+border-color: #e94560;
+}
 </style>
 </head>
 <body>
@@ -235,7 +257,11 @@ margin: 4px 6px 0 0;
 <p>PHP/Laravel и WordPress/WooCommerce разработчик, който проектира и разработва уеб приложения, онлайн магазини и промишлен софтуер — включително PaletPlaner, инструмент, който оптимизира палетизирането, като подрежда детайлите по реалната им форма. Имам и над 20 години опит в CNC машиностроенето и програмирането (Mastercam, Fanuc, Heidenhain, Siemens), включително като подизпълнител на Rolls-Royce. Намирам се във Финландия и търся нови проекти.</p>
 
 <a class="button" href="mailto:ivopengezov@gmail.com">📧 Свържи се с мен</a>
-<a class="button" href="tel:+358452253366">📞 +358 452 253 366</a>
+<a class="button" href="tel:+358452253366">📞 Обаждане</a>
+<a class="button" href="https://wa.me/358452253366" target="_blank" rel="noopener">💬 WhatsApp</a>
+<a class="button" href="viber://chat?number=%2B358452253366">📱 Viber</a>
+<a class="button" href="https://t.me/+358452253366" target="_blank" rel="noopener">✈️ Telegram</a>
+<p class="contact-fallback">ivopengezov@gmail.com · +358 452 253 366 <button class="copy-btn" type="button" data-copy="ivopengezov@gmail.com">📋 Копирай имейла</button></p>
 </section>
 
 <section id="technologies">
@@ -308,9 +334,25 @@ margin: 4px 6px 0 0;
 <h2>Да работим заедно</h2>
 <p>Отворен съм за нови проекти — уеб разработка или CNC програмиране.</p>
 <a class="button" href="mailto:ivopengezov@gmail.com">📧 Свържи се с мен</a>
-<a class="button" href="tel:+358452253366">📞 +358 452 253 366</a>
+<a class="button" href="tel:+358452253366">📞 Обаждане</a>
+<a class="button" href="https://wa.me/358452253366" target="_blank" rel="noopener">💬 WhatsApp</a>
+<a class="button" href="viber://chat?number=%2B358452253366">📱 Viber</a>
+<a class="button" href="https://t.me/+358452253366" target="_blank" rel="noopener">✈️ Telegram</a>
+<p class="contact-fallback">ivopengezov@gmail.com · +358 452 253 366 <button class="copy-btn" type="button" data-copy="ivopengezov@gmail.com">📋 Копирай имейла</button></p>
 </section>
 
 <footer>&copy; Иво Пенгезов</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(btn.dataset.copy).then(function () {
+            var original = btn.textContent;
+            btn.textContent = '✓ Копирано';
+            setTimeout(function () { btn.textContent = original; }, 2000);
+        });
+    });
+});
+</script>
 </body>
 </html>
