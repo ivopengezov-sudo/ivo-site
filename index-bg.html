@@ -238,6 +238,57 @@ cursor: pointer;
 color: #e94560;
 border-color: #e94560;
 }
+
+.path-split {
+max-width: 700px;
+margin: 0 auto 30px auto;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+text-align: left;
+}
+
+@media (max-width: 600px) {
+.path-split {
+grid-template-columns: 1fr;
+}
+}
+
+.path-card {
+display: block;
+background-color: #232342;
+border: 1px solid #2a2a4a;
+border-radius: 16px;
+padding: 20px;
+text-decoration: none;
+color: white;
+transition: border-color 0.15s;
+}
+
+.path-card:hover {
+border-color: #e94560;
+}
+
+.path-icon {
+font-size: 28px;
+}
+
+.path-card h3 {
+color: #e94560;
+margin: 8px 0 6px 0;
+font-size: 17px;
+}
+
+.path-card p {
+margin: 0;
+font-size: 14px;
+color: #b8b8d1;
+max-width: none;
+}
+
+h2[id] {
+scroll-margin-top: 70px;
+}
 </style>
 </head>
 <body>
@@ -254,6 +305,19 @@ border-color: #e94560;
 <h1>Иво Пенгезов</h1>
 <p class="tagline">Самостоятелен уеб разработчик (Laravel/PHP, WordPress/WooCommerce) &middot; CNC машинист и програмист</p>
 
+<div class="path-split">
+<a class="path-card" href="#web-dev">
+<span class="path-icon">💻</span>
+<h3>Уеб приложения и онлайн магазини</h3>
+<p>Laravel, WordPress, WooCommerce — уеб приложения, изградени за реална production употреба.</p>
+</a>
+<a class="path-card" href="#cnc">
+<span class="path-icon">⚙️</span>
+<h3>CNC програмиране и обработка</h3>
+<p>Над 20 години опит в машиностроенето и програмирането — Mastercam, Fanuc, Heidenhain, Siemens.</p>
+</a>
+</div>
+
 <p>PHP/Laravel и WordPress/WooCommerce разработчик, който проектира и разработва уеб приложения, онлайн магазини и промишлен софтуер — включително PaletPlaner, инструмент, който оптимизира палетизирането, като подрежда детайлите по реалната им форма. Имам и над 20 години опит в CNC машиностроенето и програмирането (Mastercam, Fanuc, Heidenhain, Siemens), включително като подизпълнител на Rolls-Royce. Намирам се във Финландия и търся нови проекти.</p>
 
 <a class="button" href="mailto:ivopengezov@gmail.com">📧 Свържи се с мен</a>
@@ -265,7 +329,7 @@ border-color: #e94560;
 </section>
 
 <section id="technologies">
-<h2>Уеб разработка</h2>
+<h2 id="web-dev">Уеб разработка</h2>
 <p>PHP/Laravel и WordPress/WooCommerce разработчик. Проектирам и изграждам работещи бизнес приложения и онлайн магазини от нулата — база данни, административен панел, потребителски интерфейс — и ги поддържам в реална експлоатация.</p>
 
 <div class="skills">
@@ -279,7 +343,7 @@ border-color: #e94560;
 <span class="skill-tag">WooCommerce</span>
 </div>
 
-<h2>CNC и машиностроене</h2>
+<h2 id="cnc">CNC и машиностроене</h2>
 <p>Над 20 години опит в CNC машиностроене и програмиране — от технически чертеж до готов детайл, включително като подизпълнител на Rolls-Royce.</p>
 
 <div class="skills">
