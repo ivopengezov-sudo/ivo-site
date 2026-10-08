@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Все проекты — Иво Пенгезов</title>
+<style>
+body {
+background-color: #1a1a2e;
+color: white;
+font-family: Arial;
+text-align: center;
+padding: 50px 20px;
+}
+
+h1 {
+color: #e94560;
+font-size: 40px;
+margin-bottom: 10px;
+}
+
+p {
+font-size: 18px;
+max-width: 700px;
+margin: 0 auto 30px auto;
+line-height: 1.6;
+}
+
+a.button {
+color: white;
+background-color: #e94560;
+padding: 15px 30px;
+text-decoration: none;
+border-radius: 25px;
+font-size: 18px;
+display: inline-block;
+margin: 8px;
+}
+
+a.button:hover {
+background-color: white;
+color: #e94560;
+}
+
+.back-link {
+display: inline-block;
+margin-bottom: 20px;
+color: #b8b8d1;
+text-decoration: none;
+font-size: 15px;
+}
+
+.back-link:hover {
+color: #e94560;
+}
+
+.project-card {
+max-width: 700px;
+margin: 0 auto 30px auto;
+background-color: #232342;
+border-radius: 16px;
+padding: 30px;
+text-align: left;
+}
+
+.project-card h3 {
+color: #e94560;
+margin-top: 0;
+font-size: 22px;
+}
+
+.project-card p {
+margin: 0 0 20px 0;
+font-size: 16px;
+}
+
+.project-shot {
+width: 100%;
+border-radius: 10px;
+display: block;
+margin-bottom: 20px;
+}
+
+.project-links a.button {
+padding: 10px 22px;
+font-size: 15px;
+}
+
+footer {
+margin-top: 70px;
+color: #6c6c8a;
+font-size: 14px;
+}
+</style>
+</head>
+<body>
+<a class="back-link" href="index.html">← Назад на главную</a>
+<h1>Все проекты</h1>
+<p>Всё, что я разработал — от реальных инструментов в production до демо, показывающих, как бы я подошёл к конкретной задаче.</p>
+
+<div class="project-card">
+<h3>PaletPlaner</h3>
+<p>Раскладка деталей из металла разной формы и толщины на паллеты для транспортировки решалась на глаз — часто с потерей места. PaletPlaner читает реальную форму деталей из загруженных DXF-файлов и автоматически рассчитывает оптимальную раскладку по нескольким паллетам, соблюдая реальные лимиты веса и высоты штабелирования. Спроектирован и разработан полностью самостоятельно, используется в реальной ежедневной работе — сейчас расширяется как инструмент по подписке для других цехов.</p>
+<img class="project-shot" src="../palet-planer/screenshot.png" alt="3D вид целого паллета с прямоугольниками, L-образными и круглыми деталями по их реальным контурам">
+<div class="project-links">
+<a class="button" href="https://app.paletplaner.com" target="_blank" rel="noopener">🚀 Открыть приложение</a>
+<a class="button" href="../palet-planer/index.html">🧩 Демо-версия</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Время обработки — CNC калькулятор</h3>
+<p>Оценка времени обработки по техническому чертежу обычно требует экспертного расчёта "на глаз" — легко ошибиться на деталях с сочетанием сверления, фрезеровки и резьбы. Инструмент читает PDF чертёж через AI — распознаёт отверстия, резьбы, контуры и допуски — и передаёт данные напрямую в калькулятор, который считает реальное машинное время по инструментам, материалам и станкам конкретного цеха, а не по общим значениям. Полностью двуязычный интерфейс (болгарский/английский).</p>
+<img class="project-shot" src="../machining-time/screenshot.png" alt="Главная страница Machining Time с AI-распознаванием чертежей, калькулятором и библиотеками инструментов/станков/материалов">
+<div class="project-links">
+<a class="button" href="https://machining-time-web-production.up.railway.app" target="_blank" rel="noopener">🚀 Открыть приложение</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Каменна Стряха — демо-сайт гостевого дома</h3>
+<p>У небольших семейных гостевых домов часто нет собственного сайта, и они полагаются только на объявление на Booking.com — без рассказа о месте, номерах и кухне, который убедил бы посетителя забронировать напрямую. Демо-сайт гостевого дома в Родопских горах (построен в 1912 г., три номера, родопская кухня) — с описанием номеров, выбором дат для запроса на бронирование и локацией. Создан, чтобы показать, как выглядит профессиональное присутствие в сети для небольшого семейного бизнеса в туризме.</p>
+<div class="project-links">
+<a class="button" href="../kamenna-stryaha.html" target="_blank" rel="noopener">🧩 Демо-версия</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Плагин скидок для WooCommerce</h3>
+<p>Ручное создание и обновление промокодов для скидок легко забыть или сделать с ошибкой. Этот плагин полностью убирает этот шаг — как только сумма корзины превышает заданный порог, скидка 10% применяется автоматически как комиссия в корзине, без промокода. Построен на реальном хуке WooCommerce (woocommerce_cart_calculate_fees) и протестирован на действующем магазине WooCommerce.</p>
+<img class="project-shot" src="https://github.com/user-attachments/assets/6bbb3b0d-cffb-48bc-a345-3834d7c1bb82" alt="Корзина с автоматической скидкой 10%">
+<div class="project-links">
+<a class="button" href="../woocommerce-discount-plugin/demo.html">🧩 Демо-версия</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 Код</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Плагин отзывов для WordPress</h3>
+<p>Отзывы клиентов, разбросанные по письмам, скриншотам и обычному плагину контактной формы, трудно организовать и ещё труднее показать единообразно. Этот плагин даёт отзывам собственный структурированный тип контента — имя автора, роль и рейтинг в звёздах — отображаемый через простой shortcode в адаптивной сетке, плюс REST endpoint для получения тех же данных в headless-фронтенде.</p>
+<img class="project-shot" src="../testimonials-plugin/screenshot.png" alt="Сетка с 3 примерами отзывов для вымышленной пекарни на фронтенде">
+<div class="project-links">
+<a class="button" href="../testimonials-plugin/demo.html">🧩 Демо-версия</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/testimonials-plugin/testimonials-plugin.php" target="_blank" rel="noopener">💻 Код</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Laravel система бронирования</h3>
+<p>Демо Laravel системы бронирования и оплаты: клиенты выбирают услугу и свободное время, оплачивают через Stripe Checkout, а webhook подтверждает бронирование после успешной оплаты. Двойное бронирование предотвращается реальной SQL-проверкой на пересечение, а панель администратора показывает и управляет всеми бронированиями.</p>
+<div class="project-links">
+<a class="button" href="../laravel-booking-system/flow.html">📐 Как это работает</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-booking-system/README.md" target="_blank" rel="noopener">💻 Код</a>
+</div>
+</div>
+
+<div class="project-card">
+<h3>Laravel клиентский портал</h3>
+<p>Laravel портал для подачи и просмотра документов: клиенты подают проект с сопроводительными файлами, сотрудники просматривают его и проводят через рабочий процесс по статусам, а готовые файлы возвращаются через тот же портал. Файлы хранятся на приватном диске — каждая загрузка проходит проверку прав доступа, никогда не раздаётся по угадываемому URL.</p>
+<div class="project-links">
+<a class="button" href="../laravel-client-portal/flow.html">📐 Как это работает</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/laravel-client-portal/README.md" target="_blank" rel="noopener">💻 Код</a>
+</div>
+</div>
+
+<footer>&copy; Иво Пенгезов</footer>
+</body>
+</html>

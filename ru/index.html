@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Иво Пенгезов - CNC специалист и веб-разработчик</title>
+<style>
+body {
+background-color: #1a1a2e;
+color: white;
+font-family: Arial;
+text-align: center;
+padding: 90px 20px 50px;
+}
+
+h1 {
+color: #e94560;
+font-size: 60px;
+margin-bottom: 10px;
+}
+
+h2 {
+color: #e94560;
+font-size: 28px;
+margin-top: 70px;
+margin-bottom: 20px;
+}
+
+p {
+font-size: 18px;
+max-width: 700px;
+margin: 0 auto 30px auto;
+line-height: 1.6;
+}
+
+a.button {
+color: white;
+background-color: #e94560;
+padding: 15px 30px;
+text-decoration: none;
+border-radius: 25px;
+font-size: 18px;
+display: inline-block;
+margin: 8px;
+}
+
+a.button:hover {
+background-color: white;
+color: #e94560;
+}
+
+img.avatar {
+border-radius: 50%;
+margin-bottom: 20px;
+}
+
+.tagline {
+color: #b8b8d1;
+font-size: 16px;
+margin-top: 0;
+margin-bottom: 30px;
+}
+
+.skills {
+max-width: 700px;
+margin: 0 auto 30px auto;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+}
+
+.skill-tag {
+background-color: #232342;
+color: #e94560;
+border: 1px solid #e94560;
+padding: 6px 16px;
+border-radius: 20px;
+font-size: 14px;
+}
+
+.project-card {
+max-width: 700px;
+margin: 0 auto 30px auto;
+background-color: #232342;
+border-radius: 16px;
+padding: 30px;
+text-align: left;
+}
+
+.project-card h3 {
+color: #e94560;
+margin-top: 0;
+font-size: 22px;
+}
+
+.project-card p {
+margin: 0 0 20px 0;
+font-size: 16px;
+}
+
+  .project-shot {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+.project-links a.button {
+padding: 10px 22px;
+font-size: 15px;
+}
+
+footer {
+margin-top: 70px;
+color: #6c6c8a;
+font-size: 14px;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+section {
+scroll-margin-top: 70px;
+}
+
+.navbar {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 100;
+background-color: #141428;
+border-bottom: 1px solid #2a2a4a;
+padding: 14px 20px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+gap: 24px;
+}
+
+.navbar a {
+color: #b8b8d1;
+text-decoration: none;
+font-size: 15px;
+}
+
+.navbar a:hover {
+color: #e94560;
+}
+
+.flagship-grid {
+max-width: 1100px;
+margin: 0 auto 10px auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+text-align: left;
+}
+
+@media (max-width: 900px) {
+.flagship-grid {
+grid-template-columns: 1fr;
+max-width: 400px;
+}
+}
+
+.flagship-card {
+background-color: #232342;
+border-radius: 16px;
+padding: 24px;
+display: flex;
+flex-direction: column;
+}
+
+.flagship-card img.project-shot {
+width: 100%;
+border-radius: 10px;
+display: block;
+margin-bottom: 16px;
+}
+
+.flagship-card h3 {
+color: #e94560;
+margin-top: 0;
+font-size: 20px;
+}
+
+.flagship-card p {
+margin: 0 0 16px 0;
+font-size: 15px;
+max-width: none;
+flex-grow: 1;
+}
+
+.flagship-card .project-links a.button {
+padding: 8px 18px;
+font-size: 14px;
+margin: 4px 6px 0 0;
+}
+
+.contact-fallback {
+font-size: 14px;
+color: #b8b8d1;
+margin-top: 4px;
+}
+
+.copy-btn {
+font: inherit;
+color: #b8b8d1;
+background: none;
+border: 1px solid #6c6c8a;
+border-radius: 20px;
+padding: 3px 12px;
+margin-left: 8px;
+cursor: pointer;
+}
+
+.copy-btn:hover {
+color: #e94560;
+border-color: #e94560;
+}
+
+.path-split {
+max-width: 700px;
+margin: 0 auto 30px auto;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+text-align: left;
+}
+
+@media (max-width: 600px) {
+.path-split {
+grid-template-columns: 1fr;
+}
+}
+
+.path-card {
+display: block;
+background-color: #232342;
+border: 1px solid #2a2a4a;
+border-radius: 16px;
+padding: 20px;
+text-decoration: none;
+color: white;
+transition: border-color 0.15s;
+}
+
+.path-card:hover {
+border-color: #e94560;
+}
+
+.path-icon {
+font-size: 28px;
+}
+
+.path-card h3 {
+color: #e94560;
+margin: 8px 0 6px 0;
+font-size: 17px;
+}
+
+.path-card p {
+margin: 0;
+font-size: 14px;
+color: #b8b8d1;
+max-width: none;
+}
+
+h2[id] {
+scroll-margin-top: 70px;
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<a href="#about">Обо мне</a>
+<a href="#technologies">Технологии</a>
+<a href="#projects">Проекты</a>
+<a href="#contact">Контакты</a>
+</nav>
+
+<section id="about">
+<img class="avatar" src="../foto.jpg" width="200">
+<h1>Иво Пенгезов</h1>
+<p class="tagline">Независимый веб-разработчик (Laravel/PHP, WordPress/WooCommerce) &middot; CNC-слесарь и программист</p>
+
+<div class="path-split">
+<a class="path-card" href="#web-dev">
+<span class="path-icon">💻</span>
+<h3>Веб-приложения и интернет-магазины</h3>
+<p>Laravel, WordPress, WooCommerce — веб-приложения, созданные для реальной эксплуатации.</p>
+</a>
+<a class="path-card" href="#cnc">
+<span class="path-icon">⚙️</span>
+<h3>CNC-программирование и обработка</h3>
+<p>Более 20 лет опыта в механообработке и программировании — Mastercam, Fanuc, Heidenhain, Siemens.</p>
+</a>
+</div>
+
+<p>Разработчик PHP/Laravel и WordPress/WooCommerce — проектирую и создаю веб-приложения, интернет-магазины и промышленное программное обеспечение, включая PaletPlaner, инструмент, который оптимизирует паллетирование, располагая детали по их реальной форме. Также имею более 20 лет опыта в CNC-механообработке и программировании (Mastercam, Fanuc, Heidenhain, Siemens). Нахожусь в Финляндии и открыт для новых проектов.</p>
+
+<a class="button" href="mailto:ivopengezov@yandex.ru">📧 Связаться со мной</a>
+<a class="button" href="tel:+79990290569">📞 Позвонить</a>
+<a class="button" href="https://t.me/+79990290569" target="_blank" rel="noopener">✈️ Telegram</a>
+<p class="contact-fallback">ivopengezov@yandex.ru · +7 999 029-05-69 <button class="copy-btn" type="button" data-copy="ivopengezov@yandex.ru">📋 Копировать e-mail</button></p>
+</section>
+
+<section id="technologies">
+<h2 id="web-dev">Веб-разработка</h2>
+<p>Разработчик PHP/Laravel и WordPress/WooCommerce. Проектирую и создаю рабочие бизнес-приложения и интернет-магазины с нуля — база данных, админ-панель, пользовательский интерфейс — и сопровождаю их в реальной эксплуатации.</p>
+
+<div class="skills">
+<span class="skill-tag">Laravel</span>
+<span class="skill-tag">PHP</span>
+<span class="skill-tag">MySQL</span>
+<span class="skill-tag">JavaScript</span>
+<span class="skill-tag">REST API</span>
+<span class="skill-tag">Bootstrap</span>
+<span class="skill-tag">WordPress</span>
+<span class="skill-tag">WooCommerce</span>
+</div>
+
+<h2 id="cnc">CNC и механообработка</h2>
+<p>Более 20 лет опыта в CNC-механообработке и программировании — от чтения технического чертежа до готовой детали.</p>
+
+<div class="skills">
+<span class="skill-tag">Mastercam</span>
+<span class="skill-tag">Fanuc</span>
+<span class="skill-tag">Heidenhain</span>
+<span class="skill-tag">Siemens</span>
+<span class="skill-tag">CNC-фрезеровка</span>
+<span class="skill-tag">CNC-программирование</span>
+</div>
+</section>
+
+<section id="projects">
+<h2>Флагманские проекты</h2>
+<p>Три проекта, которые лучше всего показывают, чем я занимаюсь — остальные ниже.</p>
+
+<div class="flagship-grid">
+<div class="flagship-card">
+<img class="project-shot" src="../palet-planer/screenshot.png" alt="3D вид целого паллета с прямоугольниками, L-образными и круглыми деталями по их реальным контурам">
+<h3>PaletPlaner</h3>
+<p>Детали из металла разной формы и толщины раскладывались на паллеты на глаз, часто впустую теряя место. PaletPlaner читает реальную форму DXF и автоматически рассчитывает оптимальную раскладку.</p>
+<div class="project-links">
+<a class="button" href="https://app.paletplaner.com" target="_blank" rel="noopener">🚀 Открыть приложение</a>
+<a class="button" href="../palet-planer/index.html">🧩 Демо</a>
+</div>
+</div>
+
+<div class="flagship-card">
+<img class="project-shot" src="../machining-time/screenshot.png" alt="Главная страница Machining Time с AI-распознаванием чертежей, калькулятором и библиотеками инструментов/станков/материалов">
+<h3>Время обработки</h3>
+<p>Оценка времени обработки по чертежу обычно делается на глаз. AI читает PDF, а калькулятор считает реальное время по вашим инструментам и станкам.</p>
+<div class="project-links">
+<a class="button" href="https://machining-time-web-production.up.railway.app" target="_blank" rel="noopener">🚀 Открыть приложение</a>
+</div>
+</div>
+
+<div class="flagship-card">
+<img class="project-shot" src="https://github.com/user-attachments/assets/6bbb3b0d-cffb-48bc-a345-3834d7c1bb82" alt="Корзина с автоматической скидкой 10%">
+<h3>Плагин скидок для WooCommerce</h3>
+<p>Ручное управление промокодами для скидок легко приводит к ошибкам. Плагин применяет скидку автоматически при достижении порога в корзине — без промокода.</p>
+<div class="project-links">
+<a class="button" href="../woocommerce-discount-plugin/demo.html">🧩 Демо-версия</a>
+<a class="button" href="https://github.com/ivopengezov-sudo/ivo-site/blob/main/woocommerce-discount-plugin/discount-plugin.php" target="_blank" rel="noopener">💻 Код</a>
+</div>
+</div>
+</div>
+
+<a class="button" href="projects.html">📂 Все проекты →</a>
+</section>
+
+<section id="contact">
+<h2>Давайте работать вместе</h2>
+<p>Открыт для новых проектов — веб-разработка или CNC-программирование.</p>
+<a class="button" href="mailto:ivopengezov@yandex.ru">📧 Связаться со мной</a>
+<a class="button" href="tel:+79990290569">📞 Позвонить</a>
+<a class="button" href="https://t.me/+79990290569" target="_blank" rel="noopener">✈️ Telegram</a>
+<p class="contact-fallback">ivopengezov@yandex.ru · +7 999 029-05-69 <button class="copy-btn" type="button" data-copy="ivopengezov@yandex.ru">📋 Копировать e-mail</button></p>
+</section>
+
+<footer>&copy; Иво Пенгезов</footer>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(btn.dataset.copy).then(function () {
+            var original = btn.textContent;
+            btn.textContent = '✓ Скопировано';
+            setTimeout(function () { btn.textContent = original; }, 2000);
+        });
+    });
+});
+</script>
+</body>
+</html>
