@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Къща за гости Кършеви – Ребревци, Еленски Балкан</title>
+<meta name="description" content="Къща за гости Кършеви в село Ребревци, на 10 км от Елена. 5 стаи със собствени бани, сезонен басейн, барбекю и голяма веранда с гледка към Балкана.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf7f2; --surface:#ffffff; --ink:#2b2420; --muted:#6b5f56;
+  --wood:#8a5a36; --wood-dark:#6b4327; --green:#4f6b3a; --line:#e7ded3;
+  --booked:#e9d6d0; --free:#e3ecd9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:Lora,Georgia,serif;line-height:1.2;margin:0 0 .5em}
+img{max-width:100%;display:block}
+a{color:var(--wood)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* demo ribbon */
+.demo{background:var(--ink);color:#fff;text-align:center;font-size:14px;padding:6px 16px}
+.demo a{color:#f3c98b}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(250,247,242,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:Lora,serif;font-weight:700;font-size:21px;color:var(--wood-dark);text-decoration:none}
+.logo small{display:block;font:400 12px "Source Sans 3",sans-serif;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.links{display:flex;gap:22px;align-items:center}
+.links a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+.links a:hover{color:var(--wood)}
+.lang{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:4px 12px;font-weight:600;cursor:pointer;color:var(--ink)}
+.burger{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink)}
+
+/* hero */
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;
+  background:#5a4636 url("https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_48.jpg") center/cover}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.65))}
+.hero .wrap{position:relative;padding-bottom:64px}
+.hero h1{font-size:clamp(34px,6vw,60px);margin-bottom:.2em}
+.hero p{font-size:clamp(17px,2.2vw,21px);max-width:620px;margin:0 0 24px}
+.btn{display:inline-block;background:var(--wood);color:#fff;text-decoration:none;padding:13px 26px;border-radius:6px;font-weight:600;border:0;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--wood-dark)}
+.btn.ghost{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.7);margin-left:10px}
+
+/* facts bar */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-bottom:1px solid var(--line)}
+.facts div{padding:22px 16px;text-align:center;border-right:1px solid var(--line)}
+.facts div:last-child{border-right:0}
+.facts b{display:block;font-family:Lora,serif;font-size:26px;color:var(--wood-dark)}
+.facts span{color:var(--muted);font-size:15px}
+
+section{padding:76px 0}
+.alt{background:var(--surface)}
+.lead{color:var(--muted);max-width:720px;margin-bottom:34px}
+h2{font-size:clamp(28px,4vw,38px)}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+.about img{border-radius:10px;aspect-ratio:4/3;object-fit:cover;width:100%}
+
+/* rooms */
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.alt .card{background:var(--bg)}
+.card img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.card .in{padding:16px 18px 20px}
+.card h3{font-size:20px;margin-bottom:.3em}
+.card p{margin:0;color:var(--muted);font-size:15px}
+
+/* amenities */
+.amen{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.amen div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;gap:12px;align-items:center;font-weight:600}
+.amen i{font-style:normal;font-size:24px}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gal img{aspect-ratio:1;object-fit:cover;width:100%;border-radius:6px;cursor:zoom-in;transition:opacity .2s}
+.gal img:hover{opacity:.85}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:50}
+.lb.open{display:flex}
+.lb img{max-height:88vh;max-width:92vw;border-radius:4px}
+.lb button{position:absolute;background:none;border:0;color:#fff;font-size:42px;cursor:pointer;padding:10px 18px}
+.lb .x{top:10px;right:10px}.lb .p{left:6px}.lb .n{right:6px}
+
+/* area */
+.area{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.area .card .in b{color:var(--green)}
+
+/* prices + calendar */
+.book{display:grid;grid-template-columns:1fr 1.2fr;gap:36px;align-items:start}
+.price{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px}
+.price .big{font-family:Lora,serif;font-size:42px;color:var(--wood-dark)}
+.price ul{padding-left:20px;color:var(--muted)}
+.cal{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.calhead button{background:var(--bg);border:1px solid var(--line);border-radius:6px;width:36px;height:36px;cursor:pointer;font-size:18px}
+.grid7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:15px}
+.grid7 .dn{font-weight:600;color:var(--muted);font-size:13px}
+.grid7 .d{padding:8px 0;border-radius:5px;background:var(--free)}
+.grid7 .d.b{background:var(--booked);color:#9a6b60;text-decoration:line-through}
+.grid7 .d.e{background:none}
+.legend{display:flex;gap:18px;margin-top:12px;font-size:14px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.legend .f::before{background:var(--free)}.legend .bk::before{background:var(--booked)}
+
+/* form + contact */
+.contact{display:grid;grid-template-columns:1.1fr 1fr;gap:36px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:grid;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+form .full{grid-column:1/-1}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+.cinfo p{margin:0 0 14px}
+.cinfo a{font-weight:600;text-decoration:none}
+.map{border:0;width:100%;height:260px;border-radius:10px;margin-top:8px}
+.ok{grid-column:1/-1;color:var(--green);font-weight:600;display:none}
+
+footer{background:var(--ink);color:#d8cfc6;padding:30px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#f3c98b}
+
+[hidden]{display:none!important}
+@media (max-width:900px){
+  .rooms,.area{grid-template-columns:1fr 1fr}
+  .amen{grid-template-columns:1fr 1fr}
+  .gal{grid-template-columns:repeat(3,1fr)}
+  .about,.book,.contact{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts div:nth-child(2){border-right:0}
+  .facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media (max-width:720px){
+  .links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;padding:16px;border-bottom:1px solid var(--line)}
+  .links.open{display:flex}
+  .burger{display:block}
+  .rooms,.area{grid-template-columns:1fr}
+  .gal{grid-template-columns:1fr 1fr}
+  form{grid-template-columns:1fr}
+  .btn.ghost{margin:10px 0 0}
+  section{padding:56px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="demo"><span data-bg>Примерен вариант на сайт за Къща за гости Кършеви – изработен от Иво Пенгезов.</span><span data-en hidden>Sample website for Karshevi Guest House – made by Ivo Pengezov.</span></div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">Къща Кършеви<small data-bg>Ребревци · Еленски Балкан</small><small data-en hidden>Rebrevtsi · Elena Balkan</small></a>
+    <nav class="links" id="links">
+      <a href="#about"><span data-bg>За къщата</span><span data-en hidden>The house</span></a>
+      <a href="#rooms"><span data-bg>Стаи</span><span data-en hidden>Rooms</span></a>
+      <a href="#gallery"><span data-bg>Галерия</span><span data-en hidden>Gallery</span></a>
+      <a href="#prices"><span data-bg>Цени и дати</span><span data-en hidden>Prices &amp; dates</span></a>
+      <a href="#contact"><span data-bg>Контакти</span><span data-en hidden>Contact</span></a>
+      <button class="lang" id="lang" type="button">EN</button>
+    </nav>
+    <button class="burger" id="burger" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>Къща за гости Кършеви</h1>
+    <p data-bg>Цяла къща само за вас – в тихото село Ребревци, на 10 км от Елена. Басейн, барбекю и голяма веранда с гледка към Балкана.</p>
+    <p data-en hidden>A whole house just for you – in the quiet village of Rebrevtsi, 10 km from Elena. Pool, barbecue and a large veranda overlooking the Balkan mountains.</p>
+    <a class="btn" href="#contact"><span data-bg>Направете запитване</span><span data-en hidden>Send an inquiry</span></a>
+    <a class="btn ghost" href="#prices"><span data-bg>Свободни дати</span><span data-en hidden>Free dates</span></a>
+  </div>
+</div>
+
+<div class="facts">
+  <div><b>5</b><span data-bg>стаи със собствена баня</span><span data-en hidden>en-suite rooms</span></div>
+  <div><b>15</b><span data-bg>места за спане</span><span data-en hidden>beds</span></div>
+  <div><b>10 км</b><span data-bg>до Елена</span><span data-en hidden>to Elena</span></div>
+  <div><b>10/10</b><span data-bg>оценка в Booking</span><span data-en hidden>Booking rating</span></div>
+</div>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2><span data-bg>Почивка далеч от шума на града</span><span data-en hidden>A break from the city noise</span></h2>
+      <div data-bg>
+        <p>Къща за гости Кършеви е двуетажна къща от 200 м², която се наема изцяло – подходяща за семейства, приятелски компании и празненства.</p>
+        <p>На първия етаж има просторен хол с голяма трапезария, кът за отдих и напълно оборудвана кухня. На втория етаж са спалните, като две от тях излизат на голям балкон с гледка. Навън ви очакват веранда за хранене на открито, барбекю, люлка и сезонен басейн с шезлонги.</p>
+      </div>
+      <div data-en hidden>
+        <p>Karshevi Guest House is a 200 m² two-storey house rented as a whole – ideal for families, groups of friends and celebrations.</p>
+        <p>The ground floor has a spacious living room with a large dining area, a lounge corner and a fully equipped kitchen. The bedrooms are upstairs, two of them opening onto a large balcony with a view. Outside you'll find a veranda for outdoor dining, a barbecue, a swing and a seasonal pool with sun loungers.</p>
+      </div>
+    </div>
+    <img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_50.jpg" alt="Веранда на къщата" loading="lazy">
+  </div>
+</section>
+
+<section id="rooms" class="alt">
+  <div class="wrap">
+    <h2><span data-bg>Стаи</span><span data-en hidden>Rooms</span></h2>
+    <p class="lead"><span data-bg>Пет стаи, всяка със собствена баня и тоалетна, телевизор и централно отопление. Четири тройни стаи и една за четирима.</span><span data-en hidden>Five rooms, each with its own bathroom, TV and central heating. Four triple rooms and one room for four.</span></p>
+    <div class="rooms">
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_43.jpg" alt="Тройна стая" loading="lazy"><div class="in"><h3><span data-bg>Тройни стаи</span><span data-en hidden>Triple rooms</span></h3><p data-bg>Спалня и единично легло, собствена баня. Две от стаите са с балкон и гледка.</p><p data-en hidden>Double bed plus a single bed, private bathroom. Two of the rooms have a balcony with a view.</p></div></div>
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_44.jpg" alt="Стая за четирима" loading="lazy"><div class="in"><h3><span data-bg>Стая за четирима</span><span data-en hidden>Room for four</span></h3><p data-bg>Подходяща за семейство с деца, със собствена баня.</p><p data-en hidden>Ideal for a family with children, with a private bathroom.</p></div></div>
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_39.jpg" alt="Хол" loading="lazy"><div class="in"><h3><span data-bg>Хол и трапезария</span><span data-en hidden>Living &amp; dining room</span></h3><p data-bg>Голяма маса за цялата компания, мека мебел и електрическа камина.</p><p data-en hidden>A big table for the whole group, sofas and an electric fireplace.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span data-bg>Удобства</span><span data-en hidden>Amenities</span></h2>
+    <div class="amen">
+      <div><i>🏊</i><span data-bg>Сезонен басейн</span><span data-en hidden>Seasonal pool</span></div>
+      <div><i>🔥</i><span data-bg>Барбекю</span><span data-en hidden>Barbecue</span></div>
+      <div><i>🍳</i><span data-bg>Оборудвана кухня</span><span data-en hidden>Equipped kitchen</span></div>
+      <div><i>🚗</i><span data-bg>Частен паркинг</span><span data-en hidden>Private parking</span></div>
+      <div><i>📶</i><span data-bg>Безплатен интернет</span><span data-en hidden>Free Wi-Fi</span></div>
+      <div><i>🌄</i><span data-bg>Веранда с гледка</span><span data-en hidden>Veranda with a view</span></div>
+      <div><i>🐾</i><span data-bg>Домашни любимци</span><span data-en hidden>Pets welcome</span></div>
+      <div><i>🧺</i><span data-bg>Пералня</span><span data-en hidden>Washing machine</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="alt">
+  <div class="wrap">
+    <h2><span data-bg>Галерия</span><span data-en hidden>Gallery</span></h2>
+    <div class="gal" id="gal"></div>
+  </div>
+</section>
+
+<div class="lb" id="lb"><button class="x" aria-label="Затвори">×</button><button class="p" aria-label="Назад">‹</button><img alt=""><button class="n" aria-label="Напред">›</button></div>
+
+<section>
+  <div class="wrap">
+    <h2><span data-bg>Какво има наоколо</span><span data-en hidden>Around the house</span></h2>
+    <div class="area">
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_19.jpg" alt="Гледка към Балкана" loading="lazy"><div class="in"><h3><span data-bg>Язовир Йовковци</span><span data-en hidden>Yovkovtsi Reservoir</span></h3><p><span data-bg>Съвсем близо до къщата – за риболов, разходки и пикник.</span><span data-en hidden>Very close to the house – for fishing, walks and picnics.</span></p></div></div>
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_52.jpg" alt="Природа" loading="lazy"><div class="in"><h3><span data-bg>Мемориал „Вълчан войвода“</span><span data-en hidden>Valchan Voivoda Memorial</span></h3><p><span data-bg><b>5 км</b> – в село Раевци.</span><span data-en hidden><b>5 km</b> – in the village of Raevtsi.</span></p></div></div>
+      <div class="card"><img src="https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_34.jpg" alt="Лавандула в двора" loading="lazy"><div class="in"><h3><span data-bg>Град Елена</span><span data-en hidden>The town of Elena</span></h3><p><span data-bg><b>10 км</b> – възрожденски къщи, Даскалоливницата и прочутият еленски бут.</span><span data-en hidden><b>10 km</b> – Revival-era houses, the old school and the famous Elena ham.</span></p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="prices" class="alt">
+  <div class="wrap">
+    <h2><span data-bg>Цени и свободни дати</span><span data-en hidden>Prices &amp; free dates</span></h2>
+    <div class="book">
+      <div class="price">
+        <div class="big">255 €</div>
+        <p><span data-bg>на нощ за цялата къща (до 15 души), при престой от минимум 2 нощувки.</span><span data-en hidden>per night for the whole house (up to 15 guests), minimum stay 2 nights.</span></p>
+        <ul data-bg>
+          <li>Една нощувка – 300 €</li>
+          <li>Настаняване след 14:00, напускане до 11:30</li>
+          <li>Домашните любимци са добре дошли</li>
+        </ul>
+        <ul data-en hidden>
+          <li>Single night – €300</li>
+          <li>Check-in after 14:00, check-out by 11:30</li>
+          <li>Pets are welcome</li>
+        </ul>
+        <a class="btn" href="#contact"><span data-bg>Запитване за дати</span><span data-en hidden>Ask about dates</span></a>
+      </div>
+      <div class="cal">
+        <div class="calhead"><button id="prev" aria-label="Предишен месец">‹</button><b id="mlabel"></b><button id="next" aria-label="Следващ месец">›</button></div>
+        <div class="grid7" id="cal"></div>
+        <div class="legend"><span class="f" data-bg>свободно</span><span class="f" data-en hidden>free</span><span class="bk" data-bg>заето</span><span class="bk" data-en hidden>booked</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact">
+    <form id="form">
+      <h2 class="full" style="font-size:28px"><span data-bg>Запитване</span><span data-en hidden>Inquiry</span></h2>
+      <label><span data-bg>Име</span><span data-en hidden>Name</span><input name="name" required></label>
+      <label><span data-bg>Телефон</span><span data-en hidden>Phone</span><input name="phone" type="tel" required></label>
+      <label><span data-bg>Пристигане</span><span data-en hidden>Arrival</span><input name="from" type="date" required></label>
+      <label><span data-bg>Заминаване</span><span data-en hidden>Departure</span><input name="to" type="date" required></label>
+      <label class="full"><span data-bg>Брой гости</span><span data-en hidden>Guests</span>
+        <select name="guests"><option>2–5</option><option>6–10</option><option>11–15</option></select></label>
+      <label class="full"><span data-bg>Съобщение</span><span data-en hidden>Message</span><textarea name="msg"></textarea></label>
+      <button class="btn full" type="submit"><span data-bg>Изпрати запитване</span><span data-en hidden>Send inquiry</span></button>
+      <p class="ok" id="ok"><span data-bg>Отваря се имейлът ви с попълненото запитване – натиснете „Изпрати“.</span><span data-en hidden>Your email app opens with the inquiry filled in – just press Send.</span></p>
+    </form>
+    <div class="cinfo">
+      <h2 style="font-size:28px"><span data-bg>Контакти</span><span data-en hidden>Contact</span></h2>
+      <p>📞 <a href="tel:+359878908059">0878 908 059</a> · <a href="tel:+359878908039">0878 908 039</a></p>
+      <p>✉️ <a href="mailto:kalin_karshev@abv.bg">kalin_karshev@abv.bg</a></p>
+      <p>📍 <span data-bg>с. Ребревци, община Елена</span><span data-en hidden>Rebrevtsi village, Elena municipality</span></p>
+      <iframe class="map" loading="lazy" title="Карта" src="https://maps.google.com/maps?q=42.9051323,25.7707520&z=13&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© Къща за гости Кършеви · Ребревци</span>
+    <span data-bg>Примерен сайт от <a href="https://ivopengezov.com">Иво Пенгезов</a></span><span data-en hidden>Sample site by <a href="https://ivopengezov.com">Ivo Pengezov</a></span>
+  </div>
+</footer>
+
+<script>
+// language toggle
+let lang='bg';
+const setLang=l=>{lang=l;document.documentElement.lang=l;
+  document.querySelectorAll('[data-bg]').forEach(e=>e.hidden=l!=='bg');
+  document.querySelectorAll('[data-en]').forEach(e=>e.hidden=l!=='en');
+  document.getElementById('lang').textContent=l==='bg'?'EN':'BG';drawCal();};
+document.getElementById('lang').onclick=()=>setLang(lang==='bg'?'en':'bg');
+document.getElementById('burger').onclick=()=>document.getElementById('links').classList.toggle('open');
+document.querySelectorAll('#links a').forEach(a=>a.onclick=()=>document.getElementById('links').classList.remove('open'));
+
+// gallery + lightbox
+const base='https://static.pochivka.bg/bgstay.com/images/photos/62/62832/orig_62832_';
+const ids=[48,31,33,49,50,19,39,40,36,37,9,6,43,44,42,45,46,47,8,18,34,53,52,35];
+const gal=document.getElementById('gal'),lb=document.getElementById('lb'),lbi=lb.querySelector('img');let cur=0;
+ids.forEach((id,i)=>{const im=new Image();im.src=base+id+'.jpg';im.loading='lazy';im.alt='Снимка '+(i+1);im.onclick=()=>open(i);gal.appendChild(im);});
+const open=i=>{cur=(i+ids.length)%ids.length;lbi.src=base+ids[cur]+'.jpg';lb.classList.add('open');};
+lb.querySelector('.x').onclick=()=>lb.classList.remove('open');
+lb.querySelector('.p').onclick=e=>{e.stopPropagation();open(cur-1)};
+lb.querySelector('.n').onclick=e=>{e.stopPropagation();open(cur+1)};
+lb.onclick=e=>{if(e.target===lb)lb.classList.remove('open')};
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowLeft')open(cur-1);if(e.key==='ArrowRight')open(cur+1);});
+
+// demo availability calendar (sample booked dates)
+let view=new Date();view.setDate(1);
+const booked=d=>{const n=d.getDate()+d.getMonth()*31;return d.getDay()===6||d.getDay()===5?(n%3!==0):(n%11===0);};
+function drawCal(){
+  const c=document.getElementById('cal');c.innerHTML='';
+  const months=lang==='bg'?['Януари','Февруари','Март','Април','Май','Юни','Юли','Август','Септември','Октомври','Ноември','Декември']:['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const days=lang==='bg'?['Пн','Вт','Ср','Чт','Пт','Сб','Нд']:['Mo','Tu','We','Th','Fr','Sa','Su'];
+  document.getElementById('mlabel').textContent=months[view.getMonth()]+' '+view.getFullYear();
+  days.forEach(d=>{const e=document.createElement('div');e.className='dn';e.textContent=d;c.appendChild(e);});
+  const first=(view.getDay()+6)%7;for(let i=0;i<first;i++){const e=document.createElement('div');e.className='d e';c.appendChild(e);}
+  const dim=new Date(view.getFullYear(),view.getMonth()+1,0).getDate();
+  const today=new Date();today.setHours(0,0,0,0);
+  for(let d=1;d<=dim;d++){const dt=new Date(view.getFullYear(),view.getMonth(),d);const e=document.createElement('div');
+    e.className='d'+(dt<today||booked(dt)?' b':'');e.textContent=d;c.appendChild(e);}
+}
+document.getElementById('prev').onclick=()=>{const t=new Date();t.setDate(1);t.setHours(0,0,0,0);const p=new Date(view.getFullYear(),view.getMonth()-1,1);if(p>=t){view=p;drawCal();}};
+document.getElementById('next').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);drawCal();};
+drawCal();
+
+// inquiry form -> email
+document.getElementById('form').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
+  const body=`Име: ${f.get('name')}\nТелефон: ${f.get('phone')}\nОт: ${f.get('from')}\nДо: ${f.get('to')}\nГости: ${f.get('guests')}\n\n${f.get('msg')}`;
+  location.href='mailto:kalin_karshev@abv.bg?subject='+encodeURIComponent('Запитване от сайта')+'&body='+encodeURIComponent(body);
+  document.getElementById('ok').style.display='block';};
+</script>
+</body>
+</html>
