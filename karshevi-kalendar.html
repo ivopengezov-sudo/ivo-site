@@ -339,12 +339,15 @@ function parseDate(t){t=(t||'').trim().replace(/^"|"$/g,'');if(!t)return null;le
   if(m=t.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))return new Date(+m[1],m[2]-1,+m[3]);
   if(m=t.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})/)){let y=+m[3];if(y<100)y+=2000;return new Date(y,m[2]-1,+m[1]);}
   return null;}
-async function loadBooked(){try{
-  const r=await fetch('https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:csv&_='+Date.now());
-  const txt=await r.text();
-  ranges=txt.split(/\r?\n/).slice(1).map(l=>{const c=l.split(',');return [parseDate(c[0]),parseDate(c[1])];}).filter(x=>x[0]&&x[1]);
- }catch(e){ranges=[];}
- drawCal();}
+function cellDate(c){if(!c)return null;
+  if(typeof c.v==='string'){const m=c.v.match(/^Date\((\d+),(\d+),(\d+)/);if(m)return new Date(+m[1],+m[2],+m[3]);}
+  return parseDate(c.f||c.v);}
+window.onSheet=function(res){try{
+  ranges=(res.table.rows||[]).map(r=>[cellDate(r.c[0]),cellDate(r.c[1])]).filter(x=>x[0]&&x[1]);
+ }catch(e){ranges=[];} drawCal();};
+function loadBooked(){const s=document.createElement('script');
+  s.src='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json;responseHandler:onSheet&headers=1&_='+Date.now();
+  document.body.appendChild(s);}
 const booked=d=>ranges.some(([a,b])=>d>=a&&d<=b);
 function drawCal(){
   const c=document.getElementById('cal');c.innerHTML='';
