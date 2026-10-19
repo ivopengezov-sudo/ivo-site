@@ -342,12 +342,15 @@ function parseDate(t){t=(t||'').trim().replace(/^"|"$/g,'');if(!t)return null;le
 function cellDate(c){if(!c)return null;
   if(typeof c.v==='string'){const m=c.v.match(/^Date\((\d+),(\d+),(\d+)/);if(m)return new Date(+m[1],+m[2],+m[3]);}
   return parseDate(c.f||c.v);}
+function dbg(t){return;let el=document.getElementById('caldbg');if(!el){el=document.createElement('div');el.id='caldbg';el.style.cssText='font:12px monospace;background:#ffe;border:1px solid #cc9;padding:6px;margin-top:8px;white-space:pre-wrap;word-break:break-all';document.getElementById('cal').parentNode.appendChild(el);}el.textContent+=t+'\n';}
 window.onSheet=function(res){try{
+  dbg('Отговор: '+(res.status||'')+' '+JSON.stringify(res).slice(0,600));
   ranges=(res.table.rows||[]).map(r=>[cellDate(r.c[0]),cellDate(r.c[1])]).filter(x=>x[0]&&x[1]);
- }catch(e){ranges=[];} drawCal();};
+  dbg('Намерени периоди: '+ranges.length);
+ }catch(e){dbg('Грешка: '+e.message);ranges=[];} drawCal();};
 function loadBooked(){const s=document.createElement('script');
   s.src='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/gviz/tq?tqx=out:json;responseHandler:onSheet&headers=1&_='+Date.now();
-  document.body.appendChild(s);}
+  s.onerror=()=>dbg('Скриптът от Google не се зареди');dbg('Зареждам таблицата...');document.body.appendChild(s);}
 const booked=d=>ranges.some(([a,b])=>d>=a&&d<=b);
 function drawCal(){
   const c=document.getElementById('cal');c.innerHTML='';
